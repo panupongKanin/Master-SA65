@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import ResponsiveAppBar from './Bar_01';
 
 
 
@@ -16,7 +17,9 @@ import { CardActionArea } from '@mui/material';
 function HomePage() {
 
       return (
+            
             <Paper elevation={0} sx = {{backgroundColor: "#007B7D"}}>
+                  <ResponsiveAppBar/>
                   <br />
                   <br />
                   <Container maxWidth="lg">
