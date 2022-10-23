@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { createTheme } from '@mui/system';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import { FormControl } from '@mui/material';
+import { Link as RouterLink } from "react-router-dom";
 
 
 function ResponsiveAppBar_02() {
@@ -22,19 +24,20 @@ function ResponsiveAppBar_02() {
 
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#024142" }}>
+    <AppBar position="static" sx={{ bgcolor: "#024142" }} >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        
+        <Toolbar >
           <LocalHospitalIcon fontSize='large' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/HomePage2"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-             // fontFamily: 'monospace',
+              // fontFamily: 'monospace',
               fontWeight: 700,
               //letterSpacing: '.3rem',
               color: 'inherit',
@@ -43,9 +46,10 @@ function ResponsiveAppBar_02() {
           >
             HOME
           </Typography>
+          
 
           <Typography
-  
+
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -62,7 +66,7 @@ function ResponsiveAppBar_02() {
             ติดตามอาการผู้ป่วย
           </Typography>
           <Typography
-         
+
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -79,7 +83,7 @@ function ResponsiveAppBar_02() {
             โภชนาการ
           </Typography>
           <Typography
-      
+
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -91,16 +95,18 @@ function ResponsiveAppBar_02() {
               //letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              
+              flexGrow: 1,
             }}
-            
+
           >
             การจ่ายยา
           </Typography>
-          <Button color="inherit" style={{ float: "right" }}>
-            Logout
-          </Button>
+          <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
+             LOGOUT
+           </Button>
+      
         </Toolbar>
+        
       </Container>
     </AppBar>
   );

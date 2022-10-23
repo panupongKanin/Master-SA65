@@ -14,6 +14,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ResponsiveAppBar from './Bar_01';
+import { Link as RouterLink } from "react-router-dom";
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -61,7 +62,7 @@ function MappingBedCreate() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const userID = localStorage.getItem("uid")
+  const userID = parseInt(localStorage.getItem("uid")+"");
   console.log(userID);
 
   //=======================================================================================================================================
@@ -108,7 +109,7 @@ function MappingBedCreate() {
       Bed_ID: bedID,
       Admidtime: date,
       MapBed_Comment: comments,
-      User_ID:userID,
+      User_ID: userID,
     };
     // Data ที่จะนำไป PATCH เพื่อเปลี่ยนค่า Bed_State เมื่อเตียงนั้นมีการใช้งาน
     let dataUpdateBedState = {
@@ -525,28 +526,22 @@ function MappingBedCreate() {
               />
 
             </Grid>
-            <Grid item xs={4}>
-              {/* <Button
-                                                fullWidth
-                                                onClick={submit}
-                                                variant="contained"
-                                                color="primary"
-                                          >
-                                                กลับ
-                                          </Button> */}
-            </Grid>
-            <Grid item xs={4}>
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12}>
+              <Button sx = {{backgroundColor: "#C70039"}} component={RouterLink} to="/HomePage1" variant="contained">
+                ย้อนกลับ
+              </Button>
               <Button
-                fullWidth
+                size="large"
+                style={{ float: "right" }}
                 onClick={submit}
                 variant="contained"
-                color="primary"
+                color="success"
               >
-                บันทึก
+                <b>บันทึก</b>
               </Button>
             </Grid>
+
+
 
 
           </Grid>

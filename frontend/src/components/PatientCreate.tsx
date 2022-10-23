@@ -39,7 +39,11 @@ function PatientCreate() {
   const [patient, setPatient] = React.useState<Partial<PatientInterface>>({});
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const userID = localStorage.getItem("uid")
+  //const userID = localStorage.getItem("uid")
+
+  const userID = parseInt(localStorage.getItem("uid")+"");
+
+ 
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
  const handleClose = (
@@ -99,7 +103,7 @@ const handleChange = (
      ID_Card: patient.ID_Card ?? "",           //patient.name คือการดึงค่าจากค่า Name ที่เก็บไว้ข้างใน Patient อีกทีมาใช้
      Patient_Name: patient.Name ?? "",
      Date_of_Birth: Date_of_Birth,
-     User_ID:userID,               //ยังไม่ได้ทำ ดึงมาจากระบบlogin
+     User_ID: userID,               //ยังไม่ได้ทำ ดึงมาจากระบบlogin
      GenderID: convertType(GenderID),          //GenderID != patient.GenderID บรรทัดนี้ น้ำค่า GenderID ที่ประกาศไว้ด้านบนมาใช้เลย 
      Blood_typeID: convertType(Blood_typeID),
      Drug_AllergyID: convertType(Drug_AllergyID),
@@ -109,7 +113,7 @@ const handleChange = (
   };
 
     //check data
-    console.log(data)
+    console.log(userID)
 
    const apiUrl = "http://localhost:8080/CreatePatient";
    const requestOptions = {
@@ -479,7 +483,7 @@ return (
 
 
          <Grid item xs={12}>
-           <Button component={RouterLink} to="/" variant="contained">
+           <Button sx = {{backgroundColor: "#C70039"}} component={RouterLink} to="/HomePage1" variant="contained">
              ย้อนกลับ
            </Button>
            <Button
@@ -492,9 +496,6 @@ return (
              <b>บันทึก</b>
            </Button>
          </Grid>
-
-
-
 
        </Grid>
      </Paper>

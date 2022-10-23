@@ -310,7 +310,7 @@ func CreatePatient(c *gin.Context) {
 		ID_Card:       patient.ID_Card,
 		Patient_Name:  patient.Patient_Name,
 		Date_of_Birth: patient.Date_of_Birth,
-		User:          patient.User, // check again come form where?
+		User_ID:       patient.User_ID, // check again come form where?
 		Gender:        Gender,
 		Blood_type:    Blood_type,
 		Drug_Allergy:  Drug_Allergy,

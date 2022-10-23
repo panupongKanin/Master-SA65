@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import {AppBar, Button, FormControl, IconButton, Paper, Snackbar,Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, FormControl, IconButton, Paper, Snackbar, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -17,48 +17,49 @@ import { TriagesInterface } from '../models/Triages';
 import { UserInterface } from '../models/User';
 import { UserTypeInterface } from '../models/UserType';
 import ResponsiveAppBar from './Bar_01';
+import { Link as RouterLink } from "react-router-dom";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
       props,
       ref
-     ) {
+) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-     });
-   
+});
+
 function TriagePageCreate() {
-//=======================================================================================================================================
-//รับค่าที่ได้จากการเลือก combobox ทั้งหมดเป็นตารางที่ ดึงไปใส่ตารางหลัก 
+      //=======================================================================================================================================
+      //รับค่าที่ได้จากการเลือก combobox ทั้งหมดเป็นตารางที่ ดึงไปใส่ตารางหลัก 
 
       ///////////////////บันทึกลงตารางหลัก///////////////////
-      const [patientID,setPatientID] = useState('');
-      const [diseaseID,setDiseaseID] = useState('');
-      const [inpantientdepartmentID,setInpantientDepartmentID] = useState('');
-      const [comments,setComments] = useState('');
-     
+      const [patientID, setPatientID] = useState('');
+      const [diseaseID, setDiseaseID] = useState('');
+      const [inpantientdepartmentID, setInpantientDepartmentID] = useState('');
+      const [comments, setComments] = useState('');
+
       // data ที่ได้มาจากการ fethch
       const [Triages, setTriages] = useState<Partial<TriagesInterface>>({});
       const [Diseases, setDiseases] = useState<DiseaseInterface[]>([]);
       const [DiseaseTypes, setDiseaseTypes] = useState<DiseaseTypeInterface[]>([]);
       const [InpantientDepartments, setInpantientDepartments] = useState<InpantientDepartmentInterface[]>([]);
-  
+
       // data ที่ได้มาจากการ fethch ตารางเพื่อน และ search function
-      const [patients, setPatient] = useState<any[]>([]); 
+      const [patients, setPatient] = useState<any[]>([]);
       const [Patient_Name, setPatient_Name] = useState<any[]>([]);
       const [Gender_Name, setGender_Name] = useState<any[]>([]);
       const [Blood_Name, setBlood_Name] = useState<any[]>([]);
 
-      const [userName,setUserName] = useState('');
+      const [userName, setUserName] = useState('');
       console.log(Diseases);
-    
+
 
       // Check save
       const [success, setSuccess] = useState(false);
       const [error, setError] = useState(false);
-      const userID = localStorage.getItem("uid")
+      const userID = parseInt(localStorage.getItem("uid")+"");
 
-      
-//=======================================================================================================================================
-//สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
+
+      //=======================================================================================================================================
+      //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
       const handleInputChange = (
             event: React.ChangeEvent<{ id?: string; value: any }>
       ) => {
@@ -67,10 +68,10 @@ function TriagePageCreate() {
             setTriages({ ...Triages, [id]: value });
             setComments(value);
       };
-      
+
       const onChangePatient = (event: SelectChangeEvent) => {
             setPatientID(event.target.value as string);
-            
+
       };
 
       const onChangeDisease = (event: SelectChangeEvent) => {
@@ -81,18 +82,18 @@ function TriagePageCreate() {
             setInpantientDepartmentID(event.target.value as string);
       };
 
-//=======================================================================================================================================
-//function Submit
+      //=======================================================================================================================================
+      //function Submit
       const handleClose = (
             event?: React.SyntheticEvent | Event,
             reason?: string
       ) => {
-                  if (reason === "clickaway") {
+            if (reason === "clickaway") {
                   return;
-                  }
-                  setSuccess(false);
-                  setError(false);
-            };
+            }
+            setSuccess(false);
+            setError(false);
+      };
 
       async function submit() {
             // Data ที่จะนำไปบันทึกลงใน Table Triage
@@ -101,10 +102,10 @@ function TriagePageCreate() {
                   Disease_ID: diseaseID,
                   InpantientDepartment_ID: inpantientdepartmentID,
                   Triage_Comment: comments,
-                  User_ID:userID,
+                  User_ID: userID,
             };
             let updatePatientstate = {
-                  id:patientID,
+                  id: patientID,
                   Patient_State: 1,
             };
 
@@ -115,36 +116,37 @@ function TriagePageCreate() {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(data),
-                  };
-                  fetch(apiUrl, requestOptions)
-                        .then((response) => response.json())
-                        .then((res) => {
-                              if (res.data) {
-                                    UpdatePatientstate();
-                                    getPatients();
-                                    setTimeout(() => {
-                                          window.location.reload();
-                                        }, 1000);
-                                    setSuccess(true);
-                                   
-                              } else {
-                                    setError(true);
-                              }
-                        });
+            };
+            fetch(apiUrl, requestOptions)
+                  .then((response) => response.json())
+                  .then((res) => {
+                        if (res.data) {
+                              UpdatePatientstate();
+                              getPatients();
+                              setTimeout(() => {
+                                    window.location.reload();
+                              }, 1000);
+                              setSuccess(true);
+
+                        } else {
+                              setError(true);
+                        }
+                  });
 
             const UpdatePatientstate = async () => {
                   const apiUrl = "http://localhost:8080/UpdatePatientstate";
                   const requestOptions = {
-                  method: "PATCH",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(updatePatientstate),
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updatePatientstate),
                   };
                   fetch(apiUrl, requestOptions)
                         .then((response) => response.json())
                         .then((res) => {
-                              if (res.data) {}});
+                              if (res.data) { }
+                        });
             };
- 
+
             // reset All after Submit
             setPatientID("");
             setGender_Name([]);
@@ -154,14 +156,14 @@ function TriagePageCreate() {
             setComments("")
             //==================================     
       }
-      
-//=======================================================================================================================================
-//function Search
-      function search() { 
+
+      //=======================================================================================================================================
+      //function Search
+      function search() {
             const apiUrl1 = `http://localhost:8080/GetPatient/${patientID}`;
             const requestOptions1 = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
             };
             fetch(apiUrl1, requestOptions1)
                   .then((response) => response.json())
@@ -174,20 +176,20 @@ function TriagePageCreate() {
                         }
                   });
       }
-      
-//=======================================================================================================================================
-//function fethch data จาก backend
+
+      //=======================================================================================================================================
+      //function fethch data จาก backend
       const getTriagePage = async () => {
             const apiUrl = "http://localhost:8080/GetListTriages";
             const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
             };
             fetch(apiUrl, requestOptions)
                   .then((response) => response.json())
                   .then((res) => {
                         if (res.data) {
-                             // setFilterpatients(res.data)
+                              // setFilterpatients(res.data)
                         }
                   });
       };
@@ -195,8 +197,8 @@ function TriagePageCreate() {
       const getPatients = async () => {
             const apiUrl = "http://localhost:8080/ListPatient";
             const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
             };
             fetch(apiUrl, requestOptions)
                   .then((response) => response.json())
@@ -210,8 +212,8 @@ function TriagePageCreate() {
       const getDisease = async () => {
             const apiUrl = "http://localhost:8080/GetListDisease";
             const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
             };
             fetch(apiUrl, requestOptions)
                   .then((response) => response.json())
@@ -225,8 +227,8 @@ function TriagePageCreate() {
       const getInpantientDepartment = async () => {
             const apiUrl = "http://localhost:8080/GetListIPDs";
             const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
             };
             fetch(apiUrl, requestOptions)
                   .then((response) => response.json())
@@ -245,8 +247,8 @@ function TriagePageCreate() {
             getTriagePage();
       }, []);
 
-   
-      return(
+
+      return (
             <Paper elevation={0}>
                   <Snackbar
                         open={success}
@@ -264,15 +266,15 @@ function TriagePageCreate() {
                         </Alert>
                   </Snackbar>
                   <ResponsiveAppBar />
-                  
+
 
                   <Container maxWidth="md">
                         <Paper elevation={0}>
                               <Box
                                     display={"flex"}
                                     sx={{
-                                          marginTop : 2,
-                                          marginX : 2 ,
+                                          marginTop: 2,
+                                          marginX: 2,
                                     }}
                               >
                                     <h2>
@@ -280,40 +282,40 @@ function TriagePageCreate() {
                                     </h2>
                               </Box>
                               <hr />
-                              <Grid container spacing={2} sx ={{padding : 2}}>
+                              <Grid container spacing={2} sx={{ padding: 2 }}>
                                     <Grid item xs={10}>
                                           <p>ชื่อผู้ป่วย</p>
                                           <FormControl fullWidth >
                                                 <Select
-                                                id="Patient_Name"
-                                                value={patientID}
-                                                displayEmpty
-                                                inputProps={{ 'aria-label': 'Without label' }}
-                                                onChange={onChangePatient}
+                                                      id="Patient_Name"
+                                                      value={patientID}
+                                                      displayEmpty
+                                                      inputProps={{ 'aria-label': 'Without label' }}
+                                                      onChange={onChangePatient}
                                                 >
                                                       <MenuItem value="">
                                                             กรุณาเลือกผู้ป่วย
                                                       </MenuItem>
-                                                      {patients.map( patient => (
-                                                            <MenuItem value={patient.ID} key = {patient.ID}>
+                                                      {patients.map(patient => (
+                                                            <MenuItem value={patient.ID} key={patient.ID}>
                                                                   {patient.Patient_Name}
                                                             </MenuItem>
                                                       ))}
                                                 </Select>
-                                          </FormControl>  
-                                                            
+                                          </FormControl>
+
                                     </Grid>
                                     <Grid item xs={2} >
-                                          
+
                                           <Button
                                                 onClick={search}
                                                 variant="contained"
                                                 color="primary"
-                                                sx={{marginTop : 8}}
+                                                sx={{ marginTop: 8 }}
                                           >
                                                 ค้นหา
                                           </Button>
-                                    
+
                                     </Grid>
                                     <Grid item xs={6}>
                                           <p>เพศ</p>
@@ -325,7 +327,7 @@ function TriagePageCreate() {
                                                       readOnly: true,
                                                 }}
                                           />
-                                    
+
                                     </Grid>
                                     <Grid item xs={6}>
                                           <p>หมู่เลือด</p>
@@ -337,24 +339,24 @@ function TriagePageCreate() {
                                                       readOnly: true,
                                                 }}
                                           />
-                                    
+
                                     </Grid>
-                    
+
                                     <Grid item xs={6}>
                                           <p>โรค</p>
                                           <FormControl fullWidth>
                                                 <Select
-                                                id="demo-select-small"
-                                                value={diseaseID}
-                                                displayEmpty
-                                                inputProps={{ 'aria-label': 'Without label' }}
-                                                onChange={onChangeDisease}
+                                                      id="demo-select-small"
+                                                      value={diseaseID}
+                                                      displayEmpty
+                                                      inputProps={{ 'aria-label': 'Without label' }}
+                                                      onChange={onChangeDisease}
                                                 >
                                                       <MenuItem value="">
                                                             กรุณาเลือกโรค
                                                       </MenuItem>
-                                                      {Diseases.map( diseases => (
-                                                            <MenuItem value={diseases.ID} key = {diseases.ID}>{diseases.Disease_NAME}</MenuItem>
+                                                      {Diseases.map(diseases => (
+                                                            <MenuItem value={diseases.ID} key={diseases.ID}>{diseases.Disease_NAME}</MenuItem>
                                                       ))}
                                                 </Select>
                                           </FormControl>
@@ -363,46 +365,48 @@ function TriagePageCreate() {
                                           <p>แผนก</p>
                                           <FormControl fullWidth>
                                                 <Select
-                                                id="demo-select-small"
-                                                value={inpantientdepartmentID}
-                                                displayEmpty
-                                                inputProps={{ 'aria-label': 'Without label' }}
-                                                onChange={onChangeInpantientDepartment}
+                                                      id="demo-select-small"
+                                                      value={inpantientdepartmentID}
+                                                      displayEmpty
+                                                      inputProps={{ 'aria-label': 'Without label' }}
+                                                      onChange={onChangeInpantientDepartment}
                                                 >
                                                       <MenuItem value="">
                                                             กรุณาเลือกแผนก
                                                       </MenuItem>
-                                                      {InpantientDepartments.map( inpantientdepartment => (
-                                                            <MenuItem value={inpantientdepartment.ID} key = {inpantientdepartment.ID}>{inpantientdepartment.InpantientDepartment_NAME}</MenuItem>
+                                                      {InpantientDepartments.map(inpantientdepartment => (
+                                                            <MenuItem value={inpantientdepartment.ID} key={inpantientdepartment.ID}>{inpantientdepartment.InpantientDepartment_NAME}</MenuItem>
                                                       ))}
                                                 </Select>
                                           </FormControl>
                                     </Grid>
-      
+
                                     <Grid item xs={12}>
                                           <p>เพิ่มเติม</p>
                                           <TextField
                                                 id="outlined-multiline-static"
-                                                 fullWidth
-                                                 multiline
-                                                 rows={4}
-                                                 defaultValue=""
-                                          />
-                                     </Grid>
-                                    <Grid item xs={4}>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <Button
                                                 fullWidth
+                                                multiline
+                                                rows={4}
+                                                defaultValue=""
+                                          />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                          <Button sx={{ backgroundColor: "#C70039" }} component={RouterLink} to="/HomePage1" variant="contained">
+                                                ย้อนกลับ
+                                          </Button>
+                                          <Button
+                                                size="large"
+                                                style={{ float: "right" }}
                                                 onClick={submit}
                                                 variant="contained"
-                                                color="primary"
+                                                color="success"
                                           >
-                                                บันทึก
+                                                <b>บันทึก</b>
                                           </Button>
                                     </Grid>
-                                    
-                             
+
+
                               </Grid>
                         </Paper>
                   </Container>

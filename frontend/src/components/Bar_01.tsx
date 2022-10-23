@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { createTheme } from '@mui/system';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import { Link as RouterLink } from "react-router-dom";
 
 
 function ResponsiveAppBar_01() {
@@ -30,7 +31,7 @@ function ResponsiveAppBar_01() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/HomePage1"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -109,6 +110,9 @@ function ResponsiveAppBar_01() {
             เพิ่มข้อมูลการเข้าเยี่ยม
           </Typography>
         </Toolbar>
+        <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
+             LOGOUT
+           </Button>
       </Container>
     </AppBar>
   );
