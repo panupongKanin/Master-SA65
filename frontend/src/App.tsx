@@ -16,7 +16,8 @@ return (
   
   <Router>
               <Routes>
-                <Route path="/LogIn" element={<LogIn />} />
+                <Route path="/oo" element={<LogIn />} />
+                <Route path="/PatientCreate" element={<PatientCreate />} />
                 <Route path="/mappingbedcreate" element={<MappingBedCreate />} />
                 <Route path="/" element={<HomePage />} />
               </Routes>
