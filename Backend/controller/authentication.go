@@ -19,6 +19,7 @@ type SignUpPayload struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	UserType_ID uint
 }
 
 // LoginResponse token response
@@ -94,6 +95,7 @@ func CreateUser(c *gin.Context) {
 	user.Name = payload.Name
 	user.Email = payload.Email
 	user.Password = string(hashPassword)
+	user.UserType_ID = &payload.UserType_ID
 
 	if err := entity.DB().Create(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

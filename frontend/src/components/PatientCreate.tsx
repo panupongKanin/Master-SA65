@@ -39,6 +39,7 @@ function PatientCreate() {
   const [patient, setPatient] = React.useState<Partial<PatientInterface>>({});
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const userID = localStorage.getItem("uid")
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
  const handleClose = (
@@ -94,10 +95,11 @@ const handleChange = (
   //ฟังก์ชันนี้ สำหรับการกดปุ่ม submit จะทำการสร้างข้อมูลต่าง ๆ เพื่อส่งไปทำการบันทึกที่ backend
   function submit() {
    let data = {
-     //Name: user.Name ?? "",                  //ยังไม่ได้ทำ ดึงมาจากระบบlogin
+    
      ID_Card: patient.ID_Card ?? "",           //patient.name คือการดึงค่าจากค่า Name ที่เก็บไว้ข้างใน Patient อีกทีมาใช้
      Patient_Name: patient.Name ?? "",
      Date_of_Birth: Date_of_Birth,
+     User_ID:userID,               //ยังไม่ได้ทำ ดึงมาจากระบบlogin
      GenderID: convertType(GenderID),          //GenderID != patient.GenderID บรรทัดนี้ น้ำค่า GenderID ที่ประกาศไว้ด้านบนมาใช้เลย 
      Blood_typeID: convertType(Blood_typeID),
      Drug_AllergyID: convertType(Drug_AllergyID),

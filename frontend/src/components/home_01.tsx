@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -11,8 +11,36 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import ResponsiveAppBar_01 from './Bar_01';
 import { Link as RouterLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 function HomePage_01() {
+
+      const id = localStorage.getItem("uid")
+      
+      const [User, setUser] = useState<any[]>([]);
+      
+      const getUser = async () => {
+            
+        
+        const apiUrl = `http://localhost:8080/user/${id}`;
+        const requestOptions = {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        };
+        fetch(apiUrl, requestOptions)
+          .then((response) => response.json())
+          .then((res) => {
+            if (res.data) {
+              setUser(res.data);
+              //console.log(res.data);
+              
+            } 
+          });
+      };
+      React.useEffect(() => {
+        getUser();
+      }, []);
+      
 
       return (
             
@@ -35,8 +63,6 @@ function HomePage_01() {
                                                             component="img"
                                                             height="140"
                                                             image="https://i.postimg.cc/vZszwSfS/Charactor-11.jpg"
-                                                           
-                                                            
                                                       />
                                                       <CardContent>
                                                             <Typography gutterBottom variant="h5" component="div" align = 'center' >

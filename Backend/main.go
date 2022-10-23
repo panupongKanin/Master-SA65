@@ -30,8 +30,32 @@ func main() {
 	r.POST("/CreateRIGHTS", controller.CreateRIGHTS)
 
 	r.GET("/ListPatient", controller.Listpatient)
-	r.GET("/GetPatient", controller.GetPatient)
+	r.GET("/GetPatient/:id", controller.GetPatient)
 	r.POST("/CreatePatient", controller.CreatePatient)
+
+	// ================= 02 ========================================================================================= 
+	//===========IPD===========
+	r.POST("/CreateIPD",controller.CreateIPD)
+	r.GET("/GetListIPDs",controller.GetListIPDs)
+	r.GET("/GetIPD/:id",controller.GetIPD)
+
+	
+	//===========DiseaseType===========
+	r.POST("/CreateDiseaseType",controller.CreateDiseaseType)
+	r.GET("/GetListDiseaseType",controller.GetListDiseaseTypes)
+	r.GET("/GetDiseaseType/:id",controller.GetDiseaseType)
+
+	//===========Disease===========
+	r.POST("/CreateDisease",controller.CreateDisease)
+	r.GET("/GetListDisease",controller.GetListDiseases)
+	r.GET("/GetDisease/:id",controller.GetDisease)
+
+	//===========Triage===========
+	r.POST("/CreateTriage",controller.CreateTriage)
+	r.GET("/GetListTriages",controller.GetListTriages)
+	r.GET("/GetTriage/:id",controller.GetTriage)
+
+	r.PATCH("/UpdatePatientstate", controller.UpdatePatient)
 
 
 
@@ -54,26 +78,7 @@ func main() {
 	r.PATCH("/UpdateTriagestate", controller.UpdateTriagestate)
 
 
-	//===========IPD===========
-	r.POST("/CreateIPD",controller.CreateIPD)
-	r.GET("/GetListIPDs",controller.GetListIPDs)
-	r.GET("/GetIPD/:id",controller.GetIPD)
-
 	
-	//===========DiseaseType===========
-	r.POST("/CreateDiseaseType",controller.CreateDiseaseType)
-	r.GET("/GetListDiseaseType",controller.GetListDiseaseTypes)
-	r.GET("/GetDiseaseType/:id",controller.GetDiseaseType)
-
-	//===========Disease===========
-	r.POST("/CreateDisease",controller.CreateDisease)
-	r.GET("/GetListDisease",controller.GetListDiseases)
-	r.GET("/GetDisease/:id",controller.GetDisease)
-
-	//===========Triage===========
-	r.POST("/CreateTriage",controller.CreateTriage)
-	r.GET("/GetListTriages",controller.GetListTriages)
-	r.GET("/GetTriage/:id",controller.GetTriage)
 
 
 	r.POST("/signup", controller.CreateUser)

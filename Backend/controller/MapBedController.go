@@ -46,7 +46,7 @@ func 	CreateMapBed(c *gin.Context){
 		Admidtime: map_bed.Admidtime, 		// ตั้งค่าฟิลด์ Admidtime
 		Bed_ID:    map_bed.Bed_ID,                // โยงความสัมพันธ์กับ Entity Bed
 		MapBed_Comment: map_bed.MapBed_Comment,
-		//User_ID: map_bed.User_ID,               // โยงความสัมพันธ์กับ Entity User
+		User_ID: map_bed.User_ID,               // โยงความสัมพันธ์กับ Entity User
 	}
 
 	// 15: บันทึก

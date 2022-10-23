@@ -2,14 +2,14 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import {AppBar, Button, FormControl, IconButton, Paper, Snackbar,Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, FormControl, IconButton, Paper, Snackbar, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from '@mui/material/TextField';
-import { ZoneInterface,BedInterface ,MappingBedInterface} from "../models/MapBedUserInterface";
+import { ZoneInterface, BedInterface, MappingBedInterface } from "../models/MapBedUserInterface";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -17,486 +17,516 @@ import ResponsiveAppBar from './Bar_01';
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-      props,
-      ref
-     ) {
-      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-     });
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function MappingBedCreate() {
-//=======================================================================================================================================
-//รับค่าที่ได้จากการเลือก combobox ทั้งหมดเป็นตารางที่ ดึงไปใส่ตารางหลัก 
+  //=======================================================================================================================================
+  //รับค่าที่ได้จากการเลือก combobox ทั้งหมดเป็นตารางที่ ดึงไปใส่ตารางหลัก 
 
-      ///////////////////บันทึกลงตารางหลัก///////////////////
-      const [triageID,setTriageID] = useState('');
-      const [zoneID,setZoneID] = useState('');
-      const [bedID,setBedID] = useState('');
-      const [date, setDate] = useState<Date | null>(null);
-      const [comments,setComments] = useState('');
-      // const [userID,setUserID] = useState('');
-     
-      // data ที่ได้มาจากการ fethch
-      const [MapBeds, setMapbeds] = useState<Partial<MappingBedInterface>>({});
-      const [Zones, setZones] = useState<ZoneInterface[]>([]);
-      const [Beds, setBeds] = useState<BedInterface[]>([]);
-  
-      // data ที่ได้มาจากการ fethch ตารางเพื่อน และ search function
-      const [triages, setTriages] = useState<any[]>([]); 
-      const [IPD_Name, setIPD_Name] = useState<any[]>([]);
-      const [Disease_Name, setDisease_Name] = useState<any[]>([]);
+  ///////////////////บันทึกลงตารางหลัก///////////////////
+  const [triageID, setTriageID] = useState('');
+  const [zoneID, setZoneID] = useState('');
+  const [bedID, setBedID] = useState('');
+  const [date, setDate] = useState<Date | null>(null);
+  const [comments, setComments] = useState('');
+  // const [userID,setUserID] = useState('');
 
-      const [userName,setUserName] = useState('');
+  // data ที่ได้มาจากการ fethch
+  const [MapBeds, setMapbeds] = useState<Partial<MappingBedInterface>>({});
+  const [Zones, setZones] = useState<ZoneInterface[]>([]);
+  const [Beds, setBeds] = useState<BedInterface[]>([]);
 
-      // console.log(userName);
-      
-      /*
-            ได้ 
-            Disease_Type_Name       -->   ตาราง Disease_Type
-            Gender_Name             -->   ตาราง Gender_Name
-      */     
-      const [DiseaseType, setDiseaseType] = useState<any[]>([]);
-      const [GenderType, setGenderType] = useState<any[]>([]);
+  // data ที่ได้มาจากการ fethch ตารางเพื่อน และ search function
+  const [triages, setTriages] = useState<any[]>([]);
+  const [IPD_Name, setIPD_Name] = useState<any[]>([]);
+  const [Disease_Name, setDisease_Name] = useState<any[]>([]);
 
-      // Check save
-      const [success, setSuccess] = useState(false);
-      const [error, setError] = useState(false);
-      const [State,setState] = useState(0);
+  const [userName, setUserName] = useState('');
 
-      const userID = localStorage.getItem("uid")
-      console.log(userID);
-      
-//=======================================================================================================================================
-//สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
-      const handleInputChange = (
-            event: React.ChangeEvent<{ id?: string; value: any }>
-      ) => {
-            const id = event.target.id as keyof typeof MappingBedCreate;
-            const { value } = event.target;
-            setMapbeds({ ...MapBeds, [id]: value });
-            setComments(value);
+  // console.log(userName);
+
+  /*
+        ได้ 
+        Disease_Type_Name       -->   ตาราง Disease_Type
+        Gender_Name             -->   ตาราง Gender_Name
+  */
+  const [DiseaseType, setDiseaseType] = useState<any[]>([]);
+  const [GenderType, setGenderType] = useState<any[]>([]);
+
+  // Check save
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
+  const userID = localStorage.getItem("uid")
+  console.log(userID);
+
+  //=======================================================================================================================================
+  //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
+  const handleInputChange = (
+    event: React.ChangeEvent<{ id?: string; value: any }>
+  ) => {
+    const id = event.target.id as keyof typeof MappingBedCreate;
+    const { value } = event.target;
+    setMapbeds({ ...MapBeds, [id]: value });
+    setComments(value);
+  };
+
+  const onChangeTriage = (event: SelectChangeEvent) => {
+    setTriageID(event.target.value as string);
+
+  };
+
+  const onChangeZone = (event: SelectChangeEvent) => {
+    setZoneID(event.target.value as string);
+  };
+
+  const onChangeBed = (event: SelectChangeEvent) => {
+    setBedID(event.target.value as string);
+  };
+
+  //=======================================================================================================================================
+  //function Submit
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSuccess(false);
+    setError(false);
+  };
+
+  async function submit() {
+    // Data ที่จะนำไปบันทึกลงใน Table Map_Bed
+    let data = {
+      Triage_ID: triageID,
+      Bed_ID: bedID,
+      Admidtime: date,
+      MapBed_Comment: comments,
+      User_ID:userID,
+    };
+    // Data ที่จะนำไป PATCH เพื่อเปลี่ยนค่า Bed_State เมื่อเตียงนั้นมีการใช้งาน
+    let dataUpdateBedState = {
+      id: bedID,
+      Bed_State: 1,
+    };
+    // Data ที่จะนำไป PATCH เพื่อเปลี่ยนค่า Triage_State เมื่อผู้ป่วยถูกแมพกับเตียงแล้ว
+    let dataUpdateTriageState = {
+      id: triageID,
+      Triage_State: 1,
+    };
+
+    console.log(dataUpdateBedState);
+    console.log(dataUpdateTriageState);
+    console.log(data);
+
+    const apiUrl = "http://localhost:8080/CreateMapBed";
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          UpdateBedstate();
+          UpdateTriagestate();
+          getTriages();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+          setSuccess(true);
+        } else {
+          setError(true);
+        }
+      });
+
+    const UpdateBedstate = async () => {
+      const apiUrl = "http://localhost:8080/UpdateBedstate";
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataUpdateBedState),
       };
-      
-      const onChangeTriage = (event: SelectChangeEvent) => {
-            setTriageID(event.target.value as string);
+      fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.data) { }
+        });
+    };
+    const UpdateTriagestate = async () => {
+      const apiUrl = "http://localhost:8080/UpdateTriagestate";
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataUpdateTriageState),
       };
+      fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.data) { }
+        });
+    };
 
-      const onChangeZone = (event: SelectChangeEvent) => {
-            setZoneID(event.target.value as string);
-      };
+    // const apiUrlPatchBed = "http://localhost:8080/UpdateBedstate";
+    // const requestOptionsPatchBed = {
+    //       method: "PATCH",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify(dataUpdateBedState),
+    //       };
+    //       fetch(apiUrlPatchBed, requestOptionsPatchBed)
+    //             .then((response) => response.json())
+    //             .then((res) => {});
+    const apiUrlPatchTriage = "http://localhost:8080/UpdateTriagestate";
+    const requestOptionsPatchTriage = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataUpdateTriageState),
+    };
+    fetch(apiUrlPatchTriage, requestOptionsPatchTriage)
+      .then((response) => response.json())
+      .then((res) => { });
 
-      const onChangeBed = (event: SelectChangeEvent) => {
-            setBedID(event.target.value as string);
-      };
+    // reset All after Submit
+    setTriageID("");
+    setBedID("");
+    setDate(null);
+    setZoneID("");
+    setDisease_Name([]);
+    setDiseaseType([])
+    setIPD_Name([]);
+    setGenderType([]);
+    setComments("")
+    setGenderType([]);
+    setTriages([]);
+    //==================================     
+  }
 
-//=======================================================================================================================================
-//function Submit
-      const handleClose = (
-            event?: React.SyntheticEvent | Event,
-            reason?: string
-      ) => {
-                  if (reason === "clickaway") {
-                  return;
-                  }
-                  setSuccess(false);
-                  setError(false);
-            };
+  //=======================================================================================================================================
+  //function Search
+  function search() {
+    const apiUrl1 = `http://localhost:8080/GetTriage/${triageID}`;
+    const requestOptions1 = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl1, requestOptions1)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          //console.log(res.data);
+          setIPD_Name(res.data.InpantientDepartment.InpantientDepartment_NAME);
+          setDisease_Name(res.data.Disease.Disease_NAME)
+          setDiseaseType(res.data.Disease.DiseaseType.DiseaseType_NAME)
+          setGenderType(res.data.Patient.Gender.Gender_Name)
+        }
+      });
+  }
 
-      async function submit() {
-            // Data ที่จะนำไปบันทึกลงใน Table Map_Bed
-            let data = {
-                  Triage_ID: triageID,
-                  Bed_ID: bedID,
-                  Admidtime: date,
-                  MapBed_Comment: comments,
-                  User_ID:userID,
-            };
-            // Data ที่จะนำไป PATCH เพื่อเปลี่ยนค่า Bed_State เมื่อเตียงนั้นมีการใช้งาน
-            let dataUpdateBedState = {
-                  id:bedID,
-                  Bed_State: State,
-            };
-            // Data ที่จะนำไป PATCH เพื่อเปลี่ยนค่า Triage_State เมื่อผู้ป่วยถูกแมพกับเตียงแล้ว
-            let dataUpdateTriageState = {
-                  id:triageID,
-                  Triage_State: State,
-            };
+  //=======================================================================================================================================
+  //function fethch data จาก backend
+  const getMappigBed = async () => {
+    const apiUrl = "http://localhost:8080/GetListMapBeds";
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          // setFiltertriages(res.data)
+        }
+      });
+  };
 
-            // console.log(dataUpdateBedState);
-            // console.log(dataUpdateTriageState);
-            // console.log(data);
-            
-            const apiUrl = "http://localhost:8080/CreateMapBed";
-            const requestOptions = {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(data),
-                  };
-                  fetch(apiUrl, requestOptions)
-                        .then((response) => response.json())
-                        .then((res) => {
-                              if (res.data) {
-                                    setSuccess(true);
-                                    setState(1);
-                                    getTriages();
-                              } else {
-                                    setError(true);
-                                    setState(0);
-                              }
-                        });
-            
-            const apiUrlPatchBed = "http://localhost:8080/UpdateBedstate";
-            const requestOptionsPatchBed = {
-                  method: "PATCH",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(dataUpdateBedState),
-                  };
-                  fetch(apiUrlPatchBed, requestOptionsPatchBed)
-                        .then((response) => response.json())
-                        .then((res) => {});
-            const apiUrlPatchTriage = "http://localhost:8080/UpdateTriagestate";
-            const requestOptionsPatchTriage = {
-                  method: "PATCH",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(dataUpdateTriageState),
-                  };
-                  fetch(apiUrlPatchTriage, requestOptionsPatchTriage)
-                        .then((response) => response.json())
-                        .then((res) => {});
+  const getTriages = async () => {
+    const apiUrl = "http://localhost:8080/GetListTriages";
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setTriages(res.data)
+        }
+      });
+  };
 
-            // reset All after Submit
-            setTriageID("");
-            setBedID("");
-            setDate(null);
-            setZoneID("");
-            setDisease_Name([]);
-            setDiseaseType([])
-            setIPD_Name([]);
-            setGenderType([]);
-            setComments("")
-            setGenderType([]);
-            setTriages([]);
-            //==================================     
-      }
-      
-//=======================================================================================================================================
-//function Search
-      function search() { 
-            const apiUrl1 = `http://localhost:8080/GetTriage/${triageID}`;
-            const requestOptions1 = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            };
-            fetch(apiUrl1, requestOptions1)
-                  .then((response) => response.json())
-                  .then((res) => {
-                        if (res.data) {
-                              //console.log(res.data);
-                              setIPD_Name(res.data.InpantientDepartment.InpantientDepartment_NAME);
-                              setDisease_Name(res.data.Disease.Disease_NAME)
-                              setDiseaseType(res.data.Disease.DiseaseType.DiseaseType_NAME)
-                              setGenderType(res.data.Patient.Gender.Gender_Name)
-                        }
-                  });
-      }
-      
-//=======================================================================================================================================
-//function fethch data จาก backend
-      const getMappigBed = async () => {
-            const apiUrl = "http://localhost:8080/GetListMapBeds";
-            const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            };
-            fetch(apiUrl, requestOptions)
-                  .then((response) => response.json())
-                  .then((res) => {
-                        if (res.data) {
-                             // setFiltertriages(res.data)
-                        }
-                  });
-      };
+  const getZone = async () => {
+    const apiUrl = "http://localhost:8080/GetListZones";
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setZones(res.data);
+        }
+      });
+  };
 
-      const getTriages = async () => {
-            const apiUrl = "http://localhost:8080/GetListTriages";
-            const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            };
-            fetch(apiUrl, requestOptions)
-                  .then((response) => response.json())
-                  .then((res) => {
-                        if (res.data) {
-                              setTriages(res.data)
-                        }
-                  });
-      };
+  const getBed = async () => {
+    const apiUrl = `http://localhost:8080/Bed/${zoneID}`;
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setBeds(res.data);
+        } else {
+          setBeds([]);
+        }
+      });
+  };
 
-      const getZone = async () => {
-            const apiUrl = "http://localhost:8080/GetListZones";
-            const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            };
-            fetch(apiUrl, requestOptions)
-                  .then((response) => response.json())
-                  .then((res) => {
-                        if (res.data) {
-                              setZones(res.data);
-                        }
-                  });
-      };
+  const getUser = async () => {
+    const apiUrl = `http://localhost:8080/user/${userID}`;
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setUserName(res.data.Name);
+        } else {
+          setBeds([]);
+        }
+      });
+  };
 
-      const getBed = async () => {
-            const apiUrl = `http://localhost:8080/Bed/${zoneID}`;
-            const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            };
-            fetch(apiUrl, requestOptions)
-                  .then((response) => response.json())
-                  .then((res) => {
-                        if (res.data) {
-                              setBeds(res.data);
-                        }else{
-                              setBeds([]);
-                        }
-                  });
-      };
+  //========function useEffect ========
+  useEffect(() => {
+    getTriages();
+    getZone();
+    getMappigBed();
+    getUser();
+  }, []);
 
-      const getUser = async () => {
-            const apiUrl = `http://localhost:8080/user/${userID}`;
-            const requestOptions = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            };
-            fetch(apiUrl, requestOptions)
-                  .then((response) => response.json())
-                  .then((res) => {
-                        if (res.data) {
-                              setUserName(res.data.Name);
-                        }else{
-                              setBeds([]);
-                        }
-                  });
-      };
+  useEffect(() => {
+    getBed();
+  }, [zoneID]);
 
-      //========function useEffect ========
-      useEffect(() => {
-            getTriages();
-            getZone();
-            getMappigBed();
-            getUser();
-      }, []);
+  //=======================================================================================================================================
+  //Uer inter face
+  //=======================================================================================================================================
 
-      useEffect(() => {
-            getBed();
-      }, [zoneID]);
+  return (
+    <Paper elevation={0}>
+      <Snackbar
+        open={success}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity="success">
+          บันทึกข้อมูลสำเร็จ
+        </Alert>
+      </Snackbar>
+      <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          บันทึกข้อมูลไม่สำเร็จ
+        </Alert>
+      </Snackbar>
+      <ResponsiveAppBar />
 
-//=======================================================================================================================================
-//Uer inter face
-//=======================================================================================================================================
-      
-      return(
-            <Paper elevation={0}>
-                  <Snackbar
-                        open={success}
-                        autoHideDuration={6000}
-                        onClose={handleClose}
-                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                  >
-                        <Alert onClose={handleClose} severity="success">
-                              บันทึกข้อมูลสำเร็จ
-                        </Alert>
-                  </Snackbar>
-                  <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="error">
-                              บันทึกข้อมูลไม่สำเร็จ
-                        </Alert>
-                  </Snackbar>
-                  <ResponsiveAppBar />
+      <Container maxWidth="md">
+        <Paper elevation={0}>
+          <Box
+            display={"flex"}
+            sx={{
+              marginTop: 2,
+              marginX: 2,
+            }}
+          >
+            <h2>
+              ระบบบันทึกการใช้งานเตียง
+            </h2>
+          </Box>
+          <hr />
+          <Grid container spacing={2} sx={{ padding: 2 }}>
+            <Grid item xs={10}>
+              <p>ชื่อผู้ป่วย</p>
+              <FormControl fullWidth >
+                <Select
+                  id="Patient_Name"
+                  value={triageID}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                  onChange={onChangeTriage}
+                >
+                  <MenuItem value="">
+                    กรุณาเลือกผู้ป่วย
+                  </MenuItem>
+                  {triages.map(triage => (
+                    <MenuItem value={triage.ID} key={triage.ID}>
+                      {triage.Patient.Patient_Name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-                  <Container maxWidth="md">
-                        <Paper elevation={0}>
-                              <Box
-                                    display={"flex"}
-                                    sx={{
-                                          marginTop : 2,
-                                          marginX : 2 ,
-                                    }}
-                              >
-                                    <h2>
-                                          ระบบบันทึกการใช้งานเตียง
-                                    </h2>
-                              </Box>
-                              <hr />
-                              <Grid container spacing={2} sx ={{padding : 2}}>
-                                    <Grid item xs={10}>
-                                          <p>ชื่อผู้ป่วย</p>
-                                          <FormControl fullWidth >
-                                                <Select
-                                                id="Patient_Name"
-                                                value={triageID}
-                                                displayEmpty
-                                                inputProps={{ 'aria-label': 'Without label' }}
-                                                onChange={onChangeTriage}
-                                                >
-                                                      <MenuItem value="">
-                                                            กรุณาเลือกผู้ป่วย
-                                                      </MenuItem>
-                                                      {triages.map( triage => (
-                                                            <MenuItem value={triage.ID} key = {triage.ID}>
-                                                                  {triage.Patient.Patient_Name}
-                                                            </MenuItem>
-                                                      ))}
-                                                </Select>
-                                          </FormControl>  
-                                                            
-                                    </Grid>
-                                    <Grid item xs={2} >
-                                          
-                                          <Button
-                                                onClick={search}
-                                                variant="contained"
-                                                color="primary"
-                                                sx={{marginTop : 8}}
-                                          >
-                                                ค้นหา
-                                          </Button>
-                                    
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <p>เพศ</p>
-                                          <TextField
-                                                fullWidth
-                                                id="GenderType"
-                                                value={GenderType}
-                                                InputProps={{
-                                                      readOnly: true,
-                                                }}
-                                          />
-                                    
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <p>ประเภทโรค</p>
-                                          <TextField
-                                                fullWidth
-                                                id="outlined-read-only-input"
-                                                value={DiseaseType}
-                                                InputProps={{
-                                                      readOnly: true,
-                                                      
-                                                }}
-                                          />
-                                    
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <p>โรค</p>
-                                          <TextField
-                                                fullWidth
-                                                id="outlined-read-only-input"
-                                                value={Disease_Name}
-                                                InputProps={{
-                                                      readOnly: true,
-                                                      
-                                                }}
-                                          />
-                                    
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                          <p>แผนก</p>
-                                          <TextField
-                                                fullWidth
-                                                id="outlined-read-only-input"
-                                                value={IPD_Name}
-                                                InputProps={{
-                                                      readOnly: true,
-                                                
-                                                }}
-                                          />
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <p>โซน</p>
-                                          <FormControl fullWidth>
-                                                <Select
-                                                id="demo-select-small"
-                                                value={zoneID}
-                                                displayEmpty
-                                                inputProps={{ 'aria-label': 'Without label' }}
-                                                onChange={onChangeZone}
-                                                >
-                                                      <MenuItem value="">
-                                                            กรุณาเลือกโซน
-                                                      </MenuItem>
-                                                      {Zones.map( zone => (
-                                                            <MenuItem value={zone.ID} key = {zone.ID}>{zone.Zone_Name}</MenuItem>
-                                                      ))}
-                                                </Select>
-                                          </FormControl>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <p>เตียง</p>
-                                          <FormControl fullWidth>
-                                                      <Select
-                                                      id="beds"
-                                                      value={bedID}
-                                                      displayEmpty
-                                                      inputProps={{ 'aria-label': 'Without label' }}
-                                                      onChange={onChangeBed}
-                                                      >
-                                                            <MenuItem value="">
-                                                                  กรุณาเลือกเตียง
-                                                            </MenuItem>
-                                                            {Beds.map( bed => (
-                                                                  <MenuItem value={bed.ID} key = {bed.ID}>
-                                                                        {bed.Bed_Name}
-                                                                  </MenuItem>
-                                                            ))}
-                                                      </Select>
-                                          </FormControl>
-                                          
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <p>วันที่เข้ารับการรักษา</p>
-                                          <FormControl fullWidth variant="outlined">
-                                          <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                                <DatePicker
-                                                      value={date}
-                                                      onChange={(newValue) => {setDate(newValue);}}
-                                                      renderInput={(params) => <TextField {...params} />}
-                                                />
-                                                </LocalizationProvider>
-                                          </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                          <p>หมายเหตุ</p>
-                                          <FormControl fullWidth variant="outlined">
-                                                <TextField
-                                                id="MapBed_Comment"
-                                                variant="outlined"
-                                                type="string"
-                                                size="medium"
-                                                value={comments}
-                                                defaultValue=""
-                                                onChange={handleInputChange}
-                                                />
-                                          </FormControl>
+            </Grid>
+            <Grid item xs={2} >
 
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                          <p>ผู้บันทึก</p>
-                                          <TextField
-                                                fullWidth
-                                                id="outlined-read-only-input"
-                                                value={userName}
-                                                InputProps={{
-                                                      readOnly: true,
-                                                
-                                                }}
-                                          />
-                                         
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          {/* <Button
+              <Button
+                onClick={search}
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 8 }}
+              >
+                ค้นหา
+              </Button>
+
+            </Grid>
+            <Grid item xs={4}>
+              <p>เพศ</p>
+              <TextField
+                fullWidth
+                id="GenderType"
+                value={GenderType}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+
+            </Grid>
+            <Grid item xs={4}>
+              <p>ประเภทโรค</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={DiseaseType}
+                InputProps={{
+                  readOnly: true,
+
+                }}
+              />
+
+            </Grid>
+            <Grid item xs={4}>
+              <p>โรค</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={Disease_Name}
+                InputProps={{
+                  readOnly: true,
+
+                }}
+              />
+
+            </Grid>
+            <Grid item xs={12}>
+              <p>แผนก</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={IPD_Name}
+                InputProps={{
+                  readOnly: true,
+
+                }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <p>โซน</p>
+              <FormControl fullWidth>
+                <Select
+                  id="demo-select-small"
+                  value={zoneID}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                  onChange={onChangeZone}
+                >
+                  <MenuItem value="">
+                    กรุณาเลือกโซน
+                  </MenuItem>
+                  {Zones.map(zone => (
+                    <MenuItem value={zone.ID} key={zone.ID}>{zone.Zone_Name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <p>เตียง</p>
+              <FormControl fullWidth>
+                <Select
+                  id="beds"
+                  value={bedID}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                  onChange={onChangeBed}
+                >
+                  <MenuItem value="">
+                    กรุณาเลือกเตียง
+                  </MenuItem>
+                  {Beds.map(bed => (
+                    <MenuItem value={bed.ID} key={bed.ID}>
+                      {bed.Bed_Name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+            </Grid>
+            <Grid item xs={4}>
+              <p>วันที่เข้ารับการรักษา</p>
+              <FormControl fullWidth variant="outlined">
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    value={date}
+                    onChange={(newValue) => { setDate(newValue); }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <p>หมายเหตุ</p>
+              <FormControl fullWidth variant="outlined">
+                <TextField
+                  id="MapBed_Comment"
+                  variant="outlined"
+                  type="string"
+                  size="medium"
+                  value={comments}
+                  defaultValue=""
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+
+            </Grid>
+            <Grid item xs={12}>
+              <p>ผู้บันทึก</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={userName}
+                InputProps={{
+                  readOnly: true,
+
+                }}
+              />
+
+            </Grid>
+            <Grid item xs={4}>
+              {/* <Button
                                                 fullWidth
                                                 onClick={submit}
                                                 variant="contained"
@@ -504,25 +534,25 @@ function MappingBedCreate() {
                                           >
                                                 กลับ
                                           </Button> */}
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                          <Button
-                                                fullWidth
-                                                onClick={submit}
-                                                variant="contained"
-                                                color="primary"
-                                          >
-                                                บันทึก
-                                          </Button>
-                                    </Grid>
-                                    
-                             
-                              </Grid>
-                        </Paper>
-                  </Container>
-            </Paper>
-      );
+            </Grid>
+            <Grid item xs={4}>
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                fullWidth
+                onClick={submit}
+                variant="contained"
+                color="primary"
+              >
+                บันทึก
+              </Button>
+            </Grid>
+
+
+          </Grid>
+        </Paper>
+      </Container>
+    </Paper>
+  );
 }
 export default MappingBedCreate;

@@ -48,12 +48,13 @@ function TriagePageCreate() {
       const [Blood_Name, setBlood_Name] = useState<any[]>([]);
 
       const [userName,setUserName] = useState('');
-      console.log(userName);
+      console.log(Diseases);
     
 
       // Check save
       const [success, setSuccess] = useState(false);
       const [error, setError] = useState(false);
+      const userID = localStorage.getItem("uid")
 
       
 //=======================================================================================================================================
@@ -98,9 +99,50 @@ function TriagePageCreate() {
             let data = {
                   Patient_ID: patientID,
                   Disease_ID: diseaseID,
-                  InpantientDepartmentID: inpantientdepartmentID,
+                  InpantientDepartment_ID: inpantientdepartmentID,
                   Triage_Comment: comments,
-                  //User_ID:
+                  User_ID:userID,
+            };
+            let updatePatientstate = {
+                  id:patientID,
+                  Patient_State: 1,
+            };
+
+            console.log(data);
+
+            const apiUrl = "http://localhost:8080/CreateTriage";
+            const requestOptions = {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(data),
+                  };
+                  fetch(apiUrl, requestOptions)
+                        .then((response) => response.json())
+                        .then((res) => {
+                              if (res.data) {
+                                    UpdatePatientstate();
+                                    getPatients();
+                                    setTimeout(() => {
+                                          window.location.reload();
+                                        }, 1000);
+                                    setSuccess(true);
+                                   
+                              } else {
+                                    setError(true);
+                              }
+                        });
+
+            const UpdatePatientstate = async () => {
+                  const apiUrl = "http://localhost:8080/UpdatePatientstate";
+                  const requestOptions = {
+                  method: "PATCH",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(updatePatientstate),
+                  };
+                  fetch(apiUrl, requestOptions)
+                        .then((response) => response.json())
+                        .then((res) => {
+                              if (res.data) {}});
             };
  
             // reset All after Submit
@@ -116,7 +158,7 @@ function TriagePageCreate() {
 //=======================================================================================================================================
 //function Search
       function search() { 
-            const apiUrl1 = `http://localhost:8080/GetTriage/${patientID}`;
+            const apiUrl1 = `http://localhost:8080/GetPatient/${patientID}`;
             const requestOptions1 = {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -125,10 +167,10 @@ function TriagePageCreate() {
                   .then((response) => response.json())
                   .then((res) => {
                         if (res.data) {
-                              //console.log(res.data);
-                              setPatient_Name(res.data.Patient.Patient_NAME);
-                              setGender_Name(res.data.Disease.Gender.Gender_Name)
-                              setBlood_Name(res.data.Disease.Blood_type.Blood_Name)
+                              console.log(res.data);
+                              // setPatient_Name(res.data.Patient.Patient_NAME);
+                              setGender_Name(res.data.Gender.Gender_Name)
+                              setBlood_Name(res.data.Blood_type.Blood_Name)
                         }
                   });
       }
@@ -151,7 +193,7 @@ function TriagePageCreate() {
       };
 
       const getPatients = async () => {
-            const apiUrl = "http://localhost:8080/GetListPatients";
+            const apiUrl = "http://localhost:8080/ListPatient";
             const requestOptions = {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -166,7 +208,7 @@ function TriagePageCreate() {
       };
 
       const getDisease = async () => {
-            const apiUrl = "http://localhost:8080/GetListDiseases";
+            const apiUrl = "http://localhost:8080/GetListDisease";
             const requestOptions = {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -181,7 +223,7 @@ function TriagePageCreate() {
       };
 
       const getInpantientDepartment = async () => {
-            const apiUrl = "http://localhost:8080/GetListInpantientDepartments";
+            const apiUrl = "http://localhost:8080/GetListIPDs";
             const requestOptions = {
             method: "GET",
             headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -34,8 +34,6 @@ function LogIn() {
   const [error, setError] = useState(false);
 
 
-
-
   const handleInputChange = (
     event: React.ChangeEvent<{ id?: string; value: any }>
   ) => {
@@ -56,17 +54,26 @@ function LogIn() {
   };
 
   const submit = async () => {
-    let res = await Login(signin);
-    if (res) {
-      setSuccess(true);
-      setTimeout(() => {
-        // window.location.reload();
-        window.location.href = "/mappingbedcreate";  // ไปหน้า home
-      }, 1000);
-    } else {
-      setError(true);
-    }
+    let res = await Login(signin);  
+    const apiUrl = `http://localhost:8080/user/${res.id}`;
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setTimeout(() => {
+            window.location.href = `/HomePage${res.data.UserType_ID}`;  // ไปหน้า home
+          }, 1000);
+        }
+        else {
+          setError(true);
+        }
+      });
   };
+
 
   return (
     <ThemeProvider theme={theme}>

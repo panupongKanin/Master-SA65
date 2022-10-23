@@ -39,6 +39,7 @@ func SetupDatabase() {
 		
 		
 		&User{},
+		&UserType{},
 
 		// 01 
 		&Gender{},
@@ -62,7 +63,7 @@ func SetupDatabase() {
 	//add data 01 (add_patient)
 	//เปิดใช้งานเฉพาระตอนที่ในฐานข้อมูลว่างเปล่า เพราะจะทำการบันทึกซ้ำ
 	//ใส่ข้อมูลที่เป็นข้อมูลที่ไม่เปลี่ยนแปลง
-	//ตาราง หมู่เลือดs
+	// //ตาราง หมู่เลือดs
 	// database.Create(&Blood_type{Blood_Name: "A"})
 	// database.Create(&Blood_type{Blood_Name: "B"})
 	// database.Create(&Blood_type{Blood_Name: "O"})
@@ -86,6 +87,8 @@ func SetupDatabase() {
 	// database.Create(&RIGHTS{RIGHTS_Name: "สิทธิ์องค์กรคู่สัญญา"})
 	// database.Create(&RIGHTS{RIGHTS_Name: "ผู้ป่วยที่ถือบัตรประกันสุขภาพ"})
 	// database.Create(&RIGHTS{RIGHTS_Name: "อื่น ๆ โปรดกรอกในช่องข้อมูลเพิ่มเติม"})
+	// database.Create(&UserType{UserType:"พยาบาล"})
+	// database.Create(&UserType{UserType:"หมอ"})
   db = database
   
 

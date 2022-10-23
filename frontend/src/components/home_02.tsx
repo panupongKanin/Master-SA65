@@ -26,15 +26,15 @@ function HomePage_02() {
                                     <Grid item xs={6} md={3}>
                                           <Card sx={{ maxWidth: 345 }}>
                                                 <CardActionArea
-                                                component={RouterLink} 
-                                                to="/PatientCreate"
+                                                // component={RouterLink} 
+                                                // to="/PatientCreate"
                                                 sx = {{backgroundColor: "#7B7B7B"}}
                                                 
                                                 >
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/vZszwSfS/Charactor-11.jpg"
+                                                            image="https://i.postimg.cc/kMtsgFxt/Charactor-11.jpg"
                                                            
                                                             
                                                       />
@@ -50,14 +50,14 @@ function HomePage_02() {
                                     <Grid item xs={6} md={3}>
                                           <Card sx={{ maxWidth: 345 }}>
                                                 <CardActionArea
-                                                component={RouterLink} 
-                                                to="/mappingbedcreate"
+                                                // component={RouterLink} 
+                                                // to="/mappingbedcreate"
                                                 sx = {{backgroundColor: "#7B7B7B"}}
                                                 >
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/RVxhg1QR/doctor-examining-patient-clinic-illustrated-23-2148856559-jpg.webp"
+                                                            image="https://i.postimg.cc/wTpXTKqS/doctor-examining-patient-clinic-illustrated-23-2148856559-jpg.jpg"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent>
@@ -72,15 +72,14 @@ function HomePage_02() {
                                     <Grid item xs={6} md={3}>
                                           <Card sx={{ maxWidth: 345 }}>
                                                 <CardActionArea
-                                                component={RouterLink} 
-                                                to="/mappingbedcreate"
+                                                // component={RouterLink} 
+                                                // to="/mappingbedcreate"
                                                 sx = {{backgroundColor: "#7B7B7B"}}
                                                 >
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/dt8fCC9p/22569.jpg"
-                                                            alt="green iguana"
+                                                            image="https://i.postimg.cc/Twbbf0Zd/22569.jpg"
                                                       />
                                                       <CardContent>
                                                             <Typography gutterBottom variant="h5" component="div" align = 'center'>
@@ -98,7 +97,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/Bv1Q5Nw4/8507.jpg"
+                                                            image="https://i.postimg.cc/HkKjn50V/8507.jpg"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent >

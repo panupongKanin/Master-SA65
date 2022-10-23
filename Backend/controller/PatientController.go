@@ -268,7 +268,7 @@ func UpdateRIGHTS(c *gin.Context) {
 
 // POST /patients
 func CreatePatient(c *gin.Context) {
-	//var User entity.User //check again come form where?
+	var User entity.User //check again come form where?
 	var patient entity.Patient
 	var Blood_type entity.Blood_type
 	var Gender entity.Gender
@@ -281,10 +281,10 @@ func CreatePatient(c *gin.Context) {
 		return
 	}
 	// : ค้นหา User ด้วย id
-	// if tx := entity.DB().Where("id = ?", patient.UserID).First(&User); tx.RowsAffected == 0 {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "User not found"})
-	// 	return
-	// }
+	if tx := entity.DB().Where("id = ?", patient.User_ID).First(&User); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found"})
+		return
+	}
 	// 11: ค้นหา เพศผู้ป่วย ด้วย id
 	if tx := entity.DB().Where("id = ?", patient.GenderID).First(&Gender); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Gender not found"})
@@ -332,7 +332,7 @@ func GetPatient(c *gin.Context) {
 	var patient entity.Patient
 	id := c.Param("id")
 	//id := 1 //for test Getpatient only
-	if err := entity.DB().Preload("User").Preload("Gender").Preload("Blood_type").Preload("Drug_Allergy").Preload("RIGHTS").Raw("SELECT * FROM patients WHERE id = ?", id).Find(&patient).Error; err != nil {
+	if err := entity.DB().Preload("User").Preload("Gender").Preload("Blood_type").Preload("Drug_Allergy").Preload("RIGHTS").Raw("SELECT * FROM patients WHERE id = ? AND Patient_State = 0", id).Find(&patient).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -342,7 +342,7 @@ func GetPatient(c *gin.Context) {
 // GET patient
 func Listpatient(c *gin.Context) {
 	var patient []entity.Patient
-	if err := entity.DB().Preload("User").Preload("Gender").Preload("Blood_type").Preload("Drug_Allergy").Preload("RIGHTS").Raw("SELECT * FROM patients").Find(&patient).Error; err != nil {
+	if err := entity.DB().Preload("User").Preload("Gender").Preload("Blood_type").Preload("Drug_Allergy").Preload("RIGHTS").Raw("SELECT * FROM patients WHERE Patient_State = 0").Find(&patient).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

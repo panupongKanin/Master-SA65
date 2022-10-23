@@ -1,8 +1,8 @@
 package entity
 
 import (
-	"time"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Gender struct {
@@ -35,26 +35,23 @@ type RIGHTS struct {
 	Patient []Patient `gorm:"foreignKey:RIGHTSID"`
 }
 
-// type TEST struct {
-// 	gorm.Model
-// 	TEST_Name string
-//}
 
 type Patient struct {
 	gorm.Model
-	ID_Card        string 	`gorm:"uniqueIndex"`
+	ID_Card        string `gorm:"uniqueIndex"`
 	Patient_Name   string
 	Date_of_Birth  time.Time
-	UserID         *uint	`gorm:"references:id"`
-	User           User	
+	User_ID         *uint `gorm:"references:id"`
+	User           User
 	GenderID       *uint
-	Gender         Gender	`gorm:"references:id"`
+	Gender         Gender `gorm:"references:id"`
 	Blood_typeID   *uint
-	Blood_type     Blood_type	`gorm:"references:id"`
+	Blood_type     Blood_type `gorm:"references:id"`
 	Drug_AllergyID *uint
-	Drug_Allergy   Drug_Allergy	`gorm:"references:id"`
+	Drug_Allergy   Drug_Allergy `gorm:"references:id"`
 	RIGHTSID       *uint
-	RIGHTS         RIGHTS		`gorm:"references:id"`
+	RIGHTS         RIGHTS `gorm:"references:id"`
 	Addess         string
 	Other          string
+	Patient_State  int
 }

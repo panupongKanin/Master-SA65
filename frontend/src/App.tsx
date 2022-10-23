@@ -14,13 +14,16 @@ import HomePage_02 from "./components/home_02";
 import TriagePageCreate from "./components/TriagesPage";
 
 export default function App() {
+
+  
+  
 return (
   
   <Router>
               <Routes>
-                <Route path="/oo" element={<LogIn />} />
-
-                <Route path="/" element={<HomePage_01 />} />
+                <Route path="/" element={<LogIn />} />
+                <Route path="/HomePage1" element={<HomePage_01 />} />
+                <Route path="/HomePage2" element={<HomePage_02 />} />
                 <Route path="/PatientCreate" element={<PatientCreate />} />
                 <Route path="/TriagePageCreate" element={<TriagePageCreate />} />
                 <Route path="/mappingbedcreate" element={<MappingBedCreate />} />

@@ -1,20 +1,25 @@
-
 package entity
 
-import(
-
+import (
 	"gorm.io/gorm"
 	//"time"
 )
 
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string `gorm:"uniqueIndex"`
-	Password string `json:"-"`
-	// // 1 user เป็นเจ้าของได้หลาย video
-	Map_Bed []Map_Bed `gorm:"ForeignKey:User_ID"`
+	Name        string
+	Email       string `gorm:"uniqueIndex"`
+	Password    string `json:"-"`
+	UserType_ID *uint
+	UserType    UserType `gorm:"references:id"`
 
-	// // 1 user เป็นเจ้าของได้หลาย playlist
-	// Playlists []Playlist `gorm:"foreignKey:OwnerID"`
+	Patient []Patient `gorm:"ForeignKey:User_ID"`
+	Triage  []Triage  `gorm:"ForeignKey:User_ID"`
+	Map_Bed []Map_Bed `gorm:"ForeignKey:User_ID"`
+}
+
+type UserType struct {
+	gorm.Model
+	UserType string
+	User     []User `gorm:"ForeignKey:UserType_ID"`
 }
