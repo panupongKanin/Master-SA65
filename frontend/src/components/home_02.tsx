@@ -9,10 +9,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import ResponsiveAppBar from './Bar_01';
+import ResponsiveAppBar from './Bar_02';
 import { Link as RouterLink } from "react-router-dom";
 
-function HomePage() {
+function HomePage_02() {
 
       return (
             
@@ -28,13 +28,13 @@ function HomePage() {
                                                 <CardActionArea
                                                 component={RouterLink} 
                                                 to="/PatientCreate"
-                                                sx = {{backgroundColor: "#BABABA"}}
+                                                sx = {{backgroundColor: "#7B7B7B"}}
                                                 
                                                 >
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/Px7VQrgL/e262b082eea900a43599392e60c50da4.jpg"
+                                                            image="https://i.postimg.cc/vZszwSfS/Charactor-11.jpg"
                                                            
                                                             
                                                       />
@@ -52,6 +52,7 @@ function HomePage() {
                                                 <CardActionArea
                                                 component={RouterLink} 
                                                 to="/mappingbedcreate"
+                                                sx = {{backgroundColor: "#7B7B7B"}}
                                                 >
                                                       <CardMedia
                                                             component="img"
@@ -73,11 +74,12 @@ function HomePage() {
                                                 <CardActionArea
                                                 component={RouterLink} 
                                                 to="/mappingbedcreate"
+                                                sx = {{backgroundColor: "#7B7B7B"}}
                                                 >
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="/static/images/cards/contemplative-reptile.jpg"
+                                                            image="https://i.postimg.cc/dt8fCC9p/22569.jpg"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent>
@@ -91,11 +93,12 @@ function HomePage() {
                                     </Grid>
                                     <Grid item xs={6} md={3}>
                                           <Card sx={{ maxWidth: 345 }}>
-                                                <CardActionArea>
+                                                <CardActionArea
+                                                      sx = {{backgroundColor: "#7B7B7B"}}>
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="/static/images/cards/contemplative-reptile.jpg"
+                                                            image="https://i.postimg.cc/Bv1Q5Nw4/8507.jpg"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent >
@@ -107,77 +110,76 @@ function HomePage() {
                                                 </CardActionArea>
                                           </Card>
                                     </Grid>
+                                    <Grid item xs={6} md={12}>
+                                          <br />
+                                          <br />
+                                          <br />
+                                    </Grid>
+                                    
                                     <Grid item xs={6} md={4} container justifyContent="center">
                                           <Card sx={{ maxWidth: 275.5 }}>
-                                                <CardActionArea>
+                                                <CardActionArea
+                                                      sx = {{backgroundColor: "#FDDD8E"}}>
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="/static/images/cards/contemplative-reptile.jpg"
+                                                            image="https://i.postimg.cc/Bv1Q5Nw4/8507.jpg"
                                                             alt="green iguana"
                                                       />
-                                                      <CardContent>
-                                                            <Typography gutterBottom variant="h5" component="div">
-                                                                  Lizard
+                                                      <CardContent >
+                                                            <Typography gutterBottom variant="h5" component="div" align = 'center'>
+                                                                  ติดตามอาการผู้ป่วย
                                                             </Typography>
-                                                            <Typography variant="body2" color="text.secondary">
-                                                                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                                  species, ranging across all continents except Antarctica
-                                                            </Typography>
+                                                            
                                                       </CardContent>
                                                 </CardActionArea>
                                           </Card>
                                     </Grid>
                                     <Grid item xs={6} md={4} container justifyContent="center">
                                           <Card sx={{ maxWidth: 275.5 }}>
-                                                <CardActionArea>
+                                                <CardActionArea
+                                                      sx = {{backgroundColor: "#FDDD8E"}}>
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="/static/images/cards/contemplative-reptile.jpg"
+                                                            image="https://i.postimg.cc/Bv1Q5Nw4/8507.jpg"
                                                             alt="green iguana"
                                                       />
-                                                      <CardContent>
-                                                            <Typography gutterBottom variant="h5" component="div">
-                                                                  Lizard
+                                                      <CardContent >
+                                                            <Typography gutterBottom variant="h5" component="div" align = 'center'>
+                                                                  โภชนาการ
                                                             </Typography>
-                                                            <Typography variant="body2" color="text.secondary">
-                                                                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                                  species, ranging across all continents except Antarctica
-                                                            </Typography>
+                                                            
                                                       </CardContent>
                                                 </CardActionArea>
                                           </Card>
                                     </Grid>
                                     <Grid item xs={6} md={4} container justifyContent="center">
                                           <Card sx={{ maxWidth: 275.5 }}>
-                                                <CardActionArea>
+                                                <CardActionArea
+                                                      sx = {{backgroundColor: "#FDDD8E"}}>
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="/static/images/cards/contemplative-reptile.jpg"
+                                                            image="https://i.postimg.cc/Bv1Q5Nw4/8507.jpg"
                                                             alt="green iguana"
                                                       />
-                                                      <CardContent>
-                                                            <Typography gutterBottom variant="h5" component="div">
-                                                                  Lizard
+                                                      <CardContent >
+                                                            <Typography gutterBottom variant="h5" component="div" align = 'center'>
+                                                                  การจ่ายยา
                                                             </Typography>
-                                                            <Typography variant="body2" color="text.secondary">
-                                                                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                                  species, ranging across all continents except Antarctica
-                                                            </Typography>
+                                                            
                                                       </CardContent>
                                                 </CardActionArea>
                                           </Card>
                                     </Grid>
-
+                              
                               </Grid>
                         </Box>
                   </Container>
                   <br />
                   <br />
             </Paper>
-
       );
 }
-export default HomePage;
+export default HomePage_02;

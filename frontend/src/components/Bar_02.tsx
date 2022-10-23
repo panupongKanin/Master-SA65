@@ -16,7 +16,7 @@ import { createTheme } from '@mui/system';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 
-function ResponsiveAppBar_01() {
+function ResponsiveAppBar_02() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -45,38 +45,7 @@ function ResponsiveAppBar_01() {
           </Typography>
 
           <Typography
-            noWrap
-            component="a"
-            href="/PatientCreate"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              //fontFamily: 'monospace',
-              fontWeight: 700,
-              //letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            บันทึกผู้ป่วย
-          </Typography>
-          <Typography
-            noWrap
-            component="a"
-            href="/TriagePageCreate"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              //fontFamily: 'monospace',
-              fontWeight: 700,
-              //letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            บันทึกการคัดแยกผู้ป่วย
-          </Typography>
-          <Typography
+  
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -90,9 +59,10 @@ function ResponsiveAppBar_01() {
               textDecoration: 'none',
             }}
           >
-            บันทึกการใช้งานเตียง
+            ติดตามอาการผู้ป่วย
           </Typography>
           <Typography
+         
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -106,11 +76,33 @@ function ResponsiveAppBar_01() {
               textDecoration: 'none',
             }}
           >
-            เพิ่มข้อมูลการเข้าเยี่ยม
+            โภชนาการ
           </Typography>
+          <Typography
+      
+            noWrap
+            component="a"
+            href="/mappingbedcreate"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              //fontFamily: 'monospace',
+              fontWeight: 700,
+              //letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+              
+            }}
+            
+          >
+            การจ่ายยา
+          </Typography>
+          <Button color="inherit" style={{ float: "right" }}>
+            Logout
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-export default ResponsiveAppBar_01;
+export default ResponsiveAppBar_02;

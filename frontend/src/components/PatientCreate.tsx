@@ -16,6 +16,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ResponsiveAppBar from './Bar_01';
 
 
 //ฟังค์ชันสำหรับ alert
@@ -223,6 +224,8 @@ const handleChange = (
 //////////////////////////////////////////////////////////////////////////////-_ ส่วนนี้คือส่วนที่กำหนด UI _-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 return (
+  <Paper>
+    <ResponsiveAppBar />
    <Container maxWidth="md">
      <Snackbar
        open={success}
@@ -245,6 +248,7 @@ return (
          บันทึกข้อมูลไม่สำเร็จ
        </Alert>
      </Snackbar>
+     
      
      
      <Paper >
@@ -493,6 +497,7 @@ return (
        </Grid>
      </Paper>
    </Container>
+   </Paper>
  );
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

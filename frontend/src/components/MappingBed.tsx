@@ -13,6 +13,7 @@ import { ZoneInterface,BedInterface ,MappingBedInterface} from "../models/MapBed
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import ResponsiveAppBar from './Bar_01';
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -312,27 +313,7 @@ function MappingBedCreate() {
                               บันทึกข้อมูลไม่สำเร็จ
                         </Alert>
                   </Snackbar>
-                  <Box>
-                        <AppBar position="static">
-                              <Toolbar>
-                                    <IconButton
-                                          size="large"
-                                          edge="start"
-                                          color="inherit"
-                                          aria-label="menu"
-                                          sx={{ mr: 2 }}
-                                    >
-                                    <MenuIcon />
-                                    </IconButton>
-                                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                          News
-                                    </Typography>
-                                    <Button color="inherit">
-                                          Logout
-                                    </Button>
-                              </Toolbar>
-                        </AppBar>
-                  </Box>
+                  <ResponsiveAppBar />
 
                   <Container maxWidth="md">
                         <Paper elevation={0}>
