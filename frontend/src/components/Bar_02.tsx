@@ -26,7 +26,6 @@ function ResponsiveAppBar_02() {
   return (
     <AppBar position="static" sx={{ bgcolor: "#024142" }} >
       <Container maxWidth="xl">
-        
         <Toolbar >
           <LocalHospitalIcon fontSize='large' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
@@ -46,10 +45,7 @@ function ResponsiveAppBar_02() {
           >
             HOME
           </Typography>
-          
-
           <Typography
-
             noWrap
             component="a"
             href="/mappingbedcreate"

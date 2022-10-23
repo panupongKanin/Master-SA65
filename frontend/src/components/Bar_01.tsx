@@ -14,28 +14,29 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { createTheme } from '@mui/system';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import { FormControl } from '@mui/material';
 import { Link as RouterLink } from "react-router-dom";
 
 
-function ResponsiveAppBar_01() {
+function ResponsiveAppBar_02() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#024142" }}>
+    <AppBar position="static" sx={{ bgcolor: "#024142" }} >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar >
           <LocalHospitalIcon fontSize='large' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/HomePage1"
+            href="/HomePage2"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-             // fontFamily: 'monospace',
+              // fontFamily: 'monospace',
               fontWeight: 700,
               //letterSpacing: '.3rem',
               color: 'inherit',
@@ -44,7 +45,6 @@ function ResponsiveAppBar_01() {
           >
             HOME
           </Typography>
-
           <Typography
             noWrap
             component="a"
@@ -59,9 +59,10 @@ function ResponsiveAppBar_01() {
               textDecoration: 'none',
             }}
           >
-            บันทึกผู้ป่วย
+            เพิ่มข้อมูลผู้ป่วยใน
           </Typography>
           <Typography
+
             noWrap
             component="a"
             href="/TriagePageCreate"
@@ -75,9 +76,10 @@ function ResponsiveAppBar_01() {
               textDecoration: 'none',
             }}
           >
-            บันทึกการคัดแยกผู้ป่วย
+            คัดแยกผู้ป่วย
           </Typography>
           <Typography
+
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -90,10 +92,12 @@ function ResponsiveAppBar_01() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+
           >
             บันทึกการใช้งานเตียง
           </Typography>
-          <Typography
+           <Typography
+
             noWrap
             component="a"
             href="/mappingbedcreate"
@@ -105,16 +109,20 @@ function ResponsiveAppBar_01() {
               //letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              flexGrow: 1,
             }}
+
           >
             เพิ่มข้อมูลการเข้าเยี่ยม
           </Typography>
-        </Toolbar>
-        <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
+          <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
              LOGOUT
            </Button>
+      
+        </Toolbar>
+        
       </Container>
     </AppBar>
   );
 }
-export default ResponsiveAppBar_01;
+export default ResponsiveAppBar_02;
