@@ -81,7 +81,7 @@ function LogIn() {
       <Grid container component="main" sx={{ height: "100vh" }}>
         <Snackbar
           open={success}
-          autoHideDuration={3000}
+          autoHideDuration={1000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
@@ -91,7 +91,7 @@ function LogIn() {
         </Snackbar>
         <Snackbar
           open={error}
-          autoHideDuration={3000}
+          autoHideDuration={1000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >

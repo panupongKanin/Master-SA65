@@ -72,6 +72,8 @@ function SymptomCreate() {
       LevelID: convertType(LevelID),
       MapbID: convertType(MapBedID),
     }
+    console.log(data);
+    
     fetch("http://localhost:8080/CreateSymptom", {
       method: "POST",
       headers: {
@@ -100,7 +102,7 @@ function SymptomCreate() {
     setSymptom({});
   }
 
-  const [mapbeds, setMapbed] = React.useState<MappingBedInterface[]>([]);
+  const [mapbeds, setMapbed] = React.useState<any[]>([]);
   const getMapbeds = async () => {
     const apiUrl = "http://localhost:8080/GetListMapBeds";
     const requestOptions = {
@@ -111,7 +113,7 @@ function SymptomCreate() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          setMapbed(res.data);
+          setMapbed(res.data);  
         }
       });
   };
@@ -186,12 +188,12 @@ function SymptomCreate() {
               marginTop: 2,
               marginX: 2,
             }}>
-            <h2 >ระบบติดตามอาการผู้ป่วย</h2>
+            <h2 >ระบบติดตามอาการคนไข้</h2>
           </Box><hr></hr>
           <Box>
             <Grid container spacing={0} sx={{ marginX: 17 }}>
               <Grid item xs={2.4} >
-                <p>เตียงผู้ป่วย</p>
+                <p>เตียงคนไข้</p>
               </Grid>
               <Grid item xs={9.6} >
                 <FormControl fullWidth variant="outlined">
@@ -205,7 +207,7 @@ function SymptomCreate() {
                     }}
                   >
                     <option aria-label="None" value="">
-                      เตียงผู้ป่วย
+                      เตียงคนไข้
                     </option>
                     {mapbeds.map((item: MappingBedInterface) => (
                       <option value={item.ID} key={item.ID}>
