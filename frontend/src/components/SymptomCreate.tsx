@@ -15,9 +15,8 @@ import Alert from '@mui/material/Alert';
 import { Link as RouterLink } from "react-router-dom";
 import ResponsiveAppBar from './Bar_02';
 
-import { MappingBedInterface } from "../models/MapBedUserInterface";
-import { LevelInterface, SymptomInterface } from "../models/SymptomInterface";
-import { UserInterface } from "../models/User";
+import { MappingBedInterface } from "../interfaces/MapBedUI";
+import { LevelInterface, SymptomInterface } from "../interfaces/SymptomUI";
 
 
 function SymptomCreate() {

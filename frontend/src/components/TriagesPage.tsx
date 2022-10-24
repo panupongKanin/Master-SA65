@@ -9,15 +9,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from '@mui/material/TextField';
-import { DiseaseTypeInterface } from '../models/DiseaseType';
-import { DiseaseInterface } from '../models/Disease';
-import { InpantientDepartmentInterface } from '../models/InpantientDepartment';
-import { PatientInterface } from '../models/Patient';
-import { TriagesInterface } from '../models/Triages';
-import { UserInterface } from '../models/User';
-import { UserTypeInterface } from '../models/UserType';
+
 import ResponsiveAppBar from './Bar_01';
 import { Link as RouterLink } from "react-router-dom";
+import {InpantientDepartmentInterface, DiseaseInterface,DiseaseTypeInterface, TriagesInterface } from '../interfaces/TriageUI';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
       props,
@@ -39,16 +34,13 @@ function TriagePageCreate() {
       // data ที่ได้มาจากการ fethch
       const [Triages, setTriages] = useState<Partial<TriagesInterface>>({});
       const [Diseases, setDiseases] = useState<DiseaseInterface[]>([]);
-      const [DiseaseTypes, setDiseaseTypes] = useState<DiseaseTypeInterface[]>([]);
       const [InpantientDepartments, setInpantientDepartments] = useState<InpantientDepartmentInterface[]>([]);
 
       // data ที่ได้มาจากการ fethch ตารางเพื่อน และ search function
       const [patients, setPatient] = useState<any[]>([]);
-      const [Patient_Name, setPatient_Name] = useState<any[]>([]);
       const [Gender_Name, setGender_Name] = useState<any[]>([]);
       const [Blood_Name, setBlood_Name] = useState<any[]>([]);
 
-      const [userName, setUserName] = useState('');
       console.log(Diseases);
 
 

@@ -25,9 +25,9 @@ import Divider from "@mui/material/Divider";
 import {
   ManageInterface,
   NutritionInterface,
-} from "../models/NutritionUserInterface";
+} from "../interfaces/NutritionUI";
 
-import { MappingBedInterface } from "../models/MapBedUserInterface";
+import { MappingBedInterface } from "../interfaces/MapBedUI";
 
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
