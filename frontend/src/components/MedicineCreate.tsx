@@ -117,8 +117,8 @@ function BASKETCreate() {
       Add_time: Add_time,
       WHERE_ID: convertType(WHERE_ID),          //GenderID != patient.GenderID บรรทัดนี้ น้ำค่า GenderID ที่ประกาศไว้ด้านบนมาใช้เลย 
       MEDICINE_ID: convertType(MEDICINE_ID),
-      User_ID: convertType(userID),
       Symptom_ID:convertType(Symptom_ID),
+      User_ID: convertType(userID),
 
     };
 

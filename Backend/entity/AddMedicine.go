@@ -6,27 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type BASKET struct {
-	gorm.Model
-	
-	Amount   int
-	Add_time time.Time
 
-
-	WHERE_ID *uint
-	WHERE    WHERE `gorm:"references:id"`
-
-	MEDICINE_ID *uint
-	MEDICINE    MEDICINE `gorm:"references:id"`
-
-	Symptom_ID *uint
-	Symptom    Symptom `gorm:"references:id"`
-
-	User_ID *uint
-	User    User `gorm:"references:id"`
-
-	//รอแอดของพืชที่เป็น FK heck_ID
-}
 
 type WHERE struct {
 	gorm.Model
@@ -42,4 +22,24 @@ type MEDICINE struct {
 	So      string
 	Unit    string
 	BASKETS []BASKET `gorm:"foreignKey:MEDICINE_ID"`
+}
+type BASKET struct {
+	gorm.Model
+
+	Amount   int
+	Add_time time.Time
+
+	WHERE_ID *uint
+	WHERE    WHERE `gorm:"references:id"`
+
+	MEDICINE_ID *uint 
+	MEDICINE    MEDICINE `gorm:"references:id"`
+
+	Symptom_ID *uint
+	Symptom    Symptom `gorm:"references:id"`
+
+	User_ID *uint
+	User    User `gorm:"references:id"`
+
+	//รอแอดของพืชที่เป็น FK heck_ID
 }
