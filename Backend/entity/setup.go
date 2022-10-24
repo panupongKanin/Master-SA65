@@ -67,12 +67,17 @@ func SetupDatabase() {
 		&Manage{},
 		&Nutrition{},
 
+		// 06 ระบบจ่ายยา
+		&WHERE{},
+		&BASKET{},
+		&MEDICINE{},
+
 	)
 
 	//TODO 05 Manage
-	database.Create(&Nutrition{Type: "กำหนดเอง",Receive: 0, Detail: "มีการจัดโภชนาการตามแพทย์เห็นสมควร"})
-	database.Create(&Nutrition{Type: "อาหารอ่อน, นิ่ม",Receive: 2000, Detail: "ข้าวต้ม, นม, มะม่าง"})
-	database.Create(&Nutrition{Type: "อาหารที่มีการเคี๊ยวหน่อย",Receive: 2200, Detail: "ไข่ต้ม, แตงกวา, ข้าวผัด, นม, มะม่วง"})
+	// database.Create(&Nutrition{Type: "กำหนดเอง",Receive: 0, Detail: "มีการจัดโภชนาการตามแพทย์เห็นสมควร"})
+	// database.Create(&Nutrition{Type: "อาหารอ่อน, นิ่ม",Receive: 2000, Detail: "ข้าวต้ม, นม, มะม่าง"})
+	// database.Create(&Nutrition{Type: "อาหารที่มีการเคี๊ยวหน่อย",Receive: 2200, Detail: "ไข่ต้ม, แตงกวา, ข้าวผัด, นม, มะม่วง"})
 	//add data 01 (add_patient)
 	//เปิดใช้งานเฉพาระตอนที่ในฐานข้อมูลว่างเปล่า เพราะจะทำการบันทึกซ้ำ
 	//ใส่ข้อมูลที่เป็นข้อมูลที่ไม่เปลี่ยนแปลง
@@ -103,10 +108,19 @@ func SetupDatabase() {
 	// database.Create(&UserType{UserType:"พยาบาล"})
 	// database.Create(&UserType{UserType:"หมอ"})
 
-	// เพิ่มข้อมูลตาราง Level
+	// // เพิ่มข้อมูลตาราง Level
 	// database.Create(&Level{Level_name: "Better"})
 	// database.Create(&Level{Level_name: "Stable"})
 	// database.Create(&Level{Level_name: "Worse"})
+	// // เพิ่มข้อมูลตาราง MEDICINE
+	// database.Create(&MEDICINE{Name: "HALOPERIDOL ",NameTH: "ยาระงับประสาทหูแว่ว ", How: "รับประทานครั้งละ1 เม็ด,วันละ 1 ครั้ง, หลังอาหาร, เช้า", So: "Tab", Unit: "MG."})
+	// database.Create(&MEDICINE{Name: "AMOXY ", NameTH: "ยาปฏิชีวนะกลุ่มเพนิซิลลิน  ",How: "รับประทานครั้งละ1 เม็ด,วันละ 2 ครั้ง", So: "Tab", Unit: "gm."})
+	// database.Create(&MEDICINE{Name: "PHARA",NameTH: "ยาพารา", How: "หลังอาหาร เช้า เย็น", So: "Tab", Unit: "MG."})
+	// database.Create(&WHERE{Name: "ห้องผู้ป่วยใน"})
+	// database.Create(&WHERE{Name: "ห้องผู้ป่วยนอก"})
+	// database.Create(&WHERE{Name: "ห้องผู้ป่วย VIP"})
+	// database.Create(&WHERE{Name: "ห้องฉุกเฉิน"})
+	// database.Create(&WHERE{Name: "ไปรษณีย์"})
   db = database
   
 

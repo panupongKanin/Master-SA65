@@ -32,7 +32,8 @@ type Symptom struct {
 
 	// MapbID ทำหน้าที่เป็น FK
 	MapbID *uint
-	
 	// เป็นข้อมูล Map_Bed เมื่อ join ตาราง
 	Mapb Map_Bed `gorm:"references:id"`
+	BASKET   []BASKET `gorm:"foreignKey:Symptom_ID"`
+
 }

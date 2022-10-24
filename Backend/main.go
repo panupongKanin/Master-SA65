@@ -96,10 +96,22 @@ func main() {
 	r.POST("/CreateManage", controller.CreateManage)
 	r.GET("/ListManage", controller.ListManage)
 
+
+	// ====================== 07 ===============================
+
+	r.GET("/ListMedicine", controller.ListMedicine)
+	r.GET("/ListWhere", controller.ListWhere)
+	r.POST("/CreateWhere", controller.CreateWhere)
+	r.GET("/ListBasket", controller.ListBasket)
+	r.POST("/CreateBasket", controller.CreateBasket)
+
+	
 	r.POST("/signup", controller.CreateUser)
 	// login User Route
 	r.POST("/login", controller.Login)
 	r.GET("/user/:id", controller.GetUser)
+
+
 
 	r.Run()
 }

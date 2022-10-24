@@ -47,8 +47,13 @@ function BASKETCreate() {
   const [press, setPress] = useState('0');
   const [temp, setTemp] = useState('0');
   const [hrate, setHrate] = useState('0');
+  const [comm, setComm] = useState("");
+  const [med, setMed] = useState("");
+  const [userName, setUserName] = useState('');
 
-  console.log(Symptom_ID);
+  const userID = parseInt(localStorage.getItem("uid")+"");
+
+  console.log(userName);
 
 
 
@@ -73,8 +78,6 @@ function BASKETCreate() {
       [name]: event.target.value,
     });
   };
-
-
   //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
   const handleInputChange = (
     event: React.ChangeEvent<{ id?: string; value: any }>
@@ -114,10 +117,13 @@ function BASKETCreate() {
       Add_time: Add_time,
       WHERE_ID: convertType(WHERE_ID),          //GenderID != patient.GenderID บรรทัดนี้ น้ำค่า GenderID ที่ประกาศไว้ด้านบนมาใช้เลย 
       MEDICINE_ID: convertType(MEDICINE_ID),
-      DOCTOR_ID: convertType(DOCTOR_ID),
-      Symptom_ID: convertType(Symptom_ID),
+      User_ID: convertType(userID),
+      Symptom_ID:convertType(Symptom_ID),
 
     };
+
+    console.log(data);
+    
 
     //check data
 
@@ -182,23 +188,6 @@ function BASKETCreate() {
         }
       });
   };
-  const [DOCTOR, setDoctor] = React.useState<DOCTORInterface[]>([]);
-  const getDoctor = async () => {
-    const apiUrl = `http://localhost:8080/ListDoctor`;
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          setDoctor(res.data);
-        } else {
-          console.log("else");
-        }
-      });
-  };
   const [WHERE, setWhere] = React.useState<WHEREInterface[]>([]);
   const getWhere = async () => {
     const apiUrl = `http://localhost:8080/ListWhere`;
@@ -250,9 +239,25 @@ function BASKETCreate() {
           setTemp(res.data.Temperature)
           setPress(res.data.Pressure)
           setHrate(res.data.Heart_rate)
+          setComm(res.data.Comment)
+          setMed(res.data.Medicine)
           // setPatient_Name(res.data.Patient.Patient_NAME);
 
         }
+      });
+  };
+  const getUser = async () => {
+    const apiUrl = `http://localhost:8080/user/${userID}`;
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setUserName(res.data.Name);
+        } 
       });
   };
 
@@ -260,10 +265,10 @@ function BASKETCreate() {
 
   useEffect(() => {
     getWhere();
-    getDoctor();
     getMedicine();
     getSymptom();
     GetSymptomID();
+    getUser();
 
   }, [Symptom_ID]);
 
@@ -319,7 +324,6 @@ function BASKETCreate() {
         <Divider />
 
         <Grid container spacing={2} sx={{ padding: 2 }}>
-
           <Grid item xs={1}>
             {/* <FormControl fullWidth variant="outlined"> */}
             <p>ผู้ป่วย</p>
@@ -345,6 +349,67 @@ function BASKETCreate() {
               </Select>
             </FormControl>
           </Grid>
+
+          <Grid item xs={4}>
+            <p>อุณหภูมิ</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={temp}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <p>ความดัน</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={press}
+              InputProps={{
+                readOnly: true,
+
+              }}
+
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <p>อัตราการเต้นของหัวใจ</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={hrate}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <p>อาการ</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={comm}
+              multiline
+              rows={4}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <p>ยาที่คนไข้ต้องการใช้</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={med}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </Grid>
+
 
         </Grid>
 
@@ -459,7 +524,7 @@ function BASKETCreate() {
             <FormControl fullWidth variant="outlined">
               <Select
                 native
-                value={DOCTOR_ID}
+                value={userName}
                 onChange={onChangeDOCTOR}
                 inputProps={{
                   name: "DOCTOR_ID",
@@ -468,61 +533,22 @@ function BASKETCreate() {
                 <option aria-label="None" value="">
                   กรุณาเลือกผู้จ่ายยา
                 </option>
-                {DOCTOR.map((item: DOCTORInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name} - {item.Title}
-                  </option>
-                ))}
+                <option aria-label="None" value={userName}>
+                  {userName}
+                </option>
+                
               </Select>
             </FormControl>
           </Grid>
 
-          <Grid item xs={12}>
-            <h4>อาการ</h4>
-            
 
-          </Grid>
-          <Grid item xs={4}>
-            <p>อุณหภูมิ</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={temp}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <p>ความดัน</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={press}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <p>อัตราการเต้นของหัวใจ</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={hrate}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
 
         </Grid>
         <Grid item xs={12}>
-          <Button component={RouterLink} to="/" variant="contained">
+          <Button sx={{ backgroundColor: "#C70039" }} component={RouterLink} to="/HomePage2" variant="contained">
             ย้อนกลับ
           </Button>
           <Button
-            size="large"
             style={{ float: "right" }}
             onClick={submit}
             variant="contained"
@@ -530,7 +556,9 @@ function BASKETCreate() {
           >
             <b>บันทึก</b>
           </Button>
+
         </Grid>
+        <br />
       </Paper>
     </Container>
   );
