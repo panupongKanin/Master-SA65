@@ -192,7 +192,7 @@ function HomePage_02() {
                                           <Card sx={{ maxWidth: 275.5 }}>
                                                 <CardActionArea
                                                       component={RouterLink}
-                                                      to="/PatientCreate"
+                                                      to="/BASKETCreate"
                                                       sx={{ backgroundColor: "#FDDD8E" }}>
                                                       <CardMedia
                                                             component="img"

@@ -101,7 +101,7 @@ func GetSymptom(c *gin.Context) {
 
 	var symptom entity.Symptom
 	id := c.Param("id")
-	if err := entity.DB().Preload("Mapb.Triage.Patient.Gender").Preload("Mapb.Bed.Zone").Preload("Mapb.Triage.Disease.DiseaseType").Preload("Mapb.Triage.InpantientDepartment").Raw("SELECT * FROM users WHERE id = ?", id).Scan(&symptom).Error; err != nil {
+	if err := entity.DB().Preload("Mapb.Triage.Patient.Gender").Preload("Mapb.Bed.Zone").Preload("Mapb.Triage.Disease.DiseaseType").Preload("Mapb.Triage.InpantientDepartment").Raw("SELECT * FROM symptoms WHERE id = ?", id).Find(&symptom).Error; err != nil {
 
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 
@@ -122,7 +122,5 @@ func ListSymptom(c *gin.Context) {
 		return
      }
      c.JSON(http.StatusOK, gin.H{"data": symptoms})
-
-	c.JSON(http.StatusOK, gin.H{"data": symptoms})
 
 }

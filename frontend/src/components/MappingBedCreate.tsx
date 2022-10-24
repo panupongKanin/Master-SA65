@@ -63,7 +63,7 @@ function MappingBedCreate() {
   const [error, setError] = useState(false);
 
   const userID = parseInt(localStorage.getItem("uid")+"");
-  console.log(userID);
+  // console.log(userID);
 
   //=======================================================================================================================================
   //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
@@ -233,7 +233,7 @@ function MappingBedCreate() {
   //=======================================================================================================================================
   //function fethch data จาก backend
   const getMappigBed = async () => {
-    const apiUrl = "http://localhost:8080/GetListMapBeds";
+    const apiUrl = "http://localhost:8080/GetListSymptoms";
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -242,7 +242,12 @@ function MappingBedCreate() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
+          console.log("hhh");
+          
           // setFiltertriages(res.data)
+        }else{
+          console.log("error");
+          
         }
       });
   };
