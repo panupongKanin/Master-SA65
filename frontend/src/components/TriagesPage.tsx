@@ -55,7 +55,7 @@ function TriagePageCreate() {
       // Check save
       const [success, setSuccess] = useState(false);
       const [error, setError] = useState(false);
-      const userID = parseInt(localStorage.getItem("uid")+"");
+      const userID = parseInt(localStorage.getItem("uid") + "");
 
 
       //=======================================================================================================================================
@@ -396,7 +396,6 @@ function TriagePageCreate() {
                                                 ย้อนกลับ
                                           </Button>
                                           <Button
-                                                size="large"
                                                 style={{ float: "right" }}
                                                 onClick={submit}
                                                 variant="contained"

@@ -48,7 +48,7 @@ function ResponsiveAppBar_02() {
           <Typography
             noWrap
             component="a"
-            href="/mappingbedcreate"
+            href="/SymptomCreate"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -65,7 +65,7 @@ function ResponsiveAppBar_02() {
 
             noWrap
             component="a"
-            href="/mappingbedcreate"
+            href="/Manage"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -91,12 +91,21 @@ function ResponsiveAppBar_02() {
               //letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              flexGrow: 1,
             }}
 
           >
             การจ่ายยา
           </Typography>
+          <Typography
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontWeight: 700,
+              color: 'inherit',
+              textDecoration: 'none',
+              flexGrow: 1,
+            }}
+          />
           <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
              LOGOUT
            </Button>

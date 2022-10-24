@@ -487,7 +487,6 @@ return (
              ย้อนกลับ
            </Button>
            <Button
-             size="large"
              style={{ float: "right" }}
              onClick={submit}
              variant="contained"

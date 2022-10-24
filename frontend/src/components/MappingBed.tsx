@@ -531,7 +531,6 @@ function MappingBedCreate() {
                 ย้อนกลับ
               </Button>
               <Button
-                size="large"
                 style={{ float: "right" }}
                 onClick={submit}
                 variant="contained"
@@ -540,10 +539,6 @@ function MappingBedCreate() {
                 <b>บันทึก</b>
               </Button>
             </Grid>
-
-
-
-
           </Grid>
         </Paper>
       </Container>

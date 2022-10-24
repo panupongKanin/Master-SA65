@@ -59,7 +59,20 @@ func SetupDatabase() {
     		&Zone{},
 		&Map_Bed{},
 
+		// 04 ระบบติดตามอาการผู้ป่วย 
+		&Level{},
+		&Symptom{},
+
+		// 05 ระบบโภชนาการ
+		&Manage{},
+		&Nutrition{},
+
 	)
+
+	//TODO 05 Manage
+	database.Create(&Nutrition{Type: "กำหนดเอง",Receive: 0, Detail: "มีการจัดโภชนาการตามแพทย์เห็นสมควร"})
+	database.Create(&Nutrition{Type: "อาหารอ่อน, นิ่ม",Receive: 2000, Detail: "ข้าวต้ม, นม, มะม่าง"})
+	database.Create(&Nutrition{Type: "อาหารที่มีการเคี๊ยวหน่อย",Receive: 2200, Detail: "ไข่ต้ม, แตงกวา, ข้าวผัด, นม, มะม่วง"})
 	//add data 01 (add_patient)
 	//เปิดใช้งานเฉพาระตอนที่ในฐานข้อมูลว่างเปล่า เพราะจะทำการบันทึกซ้ำ
 	//ใส่ข้อมูลที่เป็นข้อมูลที่ไม่เปลี่ยนแปลง
@@ -89,6 +102,11 @@ func SetupDatabase() {
 	// database.Create(&RIGHTS{RIGHTS_Name: "อื่น ๆ โปรดกรอกในช่องข้อมูลเพิ่มเติม"})
 	// database.Create(&UserType{UserType:"พยาบาล"})
 	// database.Create(&UserType{UserType:"หมอ"})
+
+	// เพิ่มข้อมูลตาราง Level
+	// database.Create(&Level{Level_name: "Better"})
+	// database.Create(&Level{Level_name: "Stable"})
+	// database.Create(&Level{Level_name: "Worse"})
   db = database
   
 

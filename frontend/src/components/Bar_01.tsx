@@ -109,12 +109,22 @@ function ResponsiveAppBar_02() {
               //letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              flexGrow: 1,
+
             }}
 
           >
             เพิ่มข้อมูลการเข้าเยี่ยม
           </Typography>
+          <Typography
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontWeight: 700,
+              color: 'inherit',
+              textDecoration: 'none',
+              flexGrow: 1,
+            }}
+          />
           <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
              LOGOUT
            </Button>

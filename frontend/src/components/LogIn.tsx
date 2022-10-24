@@ -66,7 +66,6 @@ function LogIn() {
         if (res.data) {
           setSuccess(true);
           setTimeout(() => {
-            
             window.location.href = `/HomePage${res.data.UserType_ID}`;  // ไปหน้า home
           }, 1000);
         }
