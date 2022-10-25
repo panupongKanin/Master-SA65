@@ -46,7 +46,7 @@ func 	CreateMapBed(c *gin.Context){
 		Admidtime: map_bed.Admidtime, 		// ตั้งค่าฟิลด์ Admidtime
 		Bed_ID:    map_bed.Bed_ID,                // โยงความสัมพันธ์กับ Entity Bed
 		MapBed_Comment: map_bed.MapBed_Comment,
-		//User_ID: map_bed.User_ID,               // โยงความสัมพันธ์กับ Entity User
+		User_ID: map_bed.User_ID,               // โยงความสัมพันธ์กับ Entity User
 	}
 
 	// 15: บันทึก
@@ -62,7 +62,7 @@ func 	CreateMapBed(c *gin.Context){
 func GetMapBed(c *gin.Context) {
 	var GetMapBed entity.Map_Bed
 	id := c.Param("id")
-	if err := entity.DB().Preload("Bed.Zone").Preload("Triage.Patient.Gender").Preload("Triage.Disease.DiseaseType").Preload("Triage.Ipd").Raw("SELECT * FROM map_beds WHERE id = ?", id).Scan(&GetMapBed).Error; err != nil {
+	if err := entity.DB().Preload("Bed.Zone").Preload("Triage.Patient.Gender").Preload("Triage.Disease.DiseaseType").Preload("Triage.InpantientDepartment").Raw("SELECT * FROM map_beds WHERE id = ?", id).Find(&GetMapBed).Error; err != nil {
 		 c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		 return
 	}

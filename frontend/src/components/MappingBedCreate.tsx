@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { AppBar, Button, FormControl, IconButton, Paper, Snackbar, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
@@ -175,24 +174,6 @@ function MappingBedCreate() {
         });
     };
 
-    // const apiUrlPatchBed = "http://localhost:8080/UpdateBedstate";
-    // const requestOptionsPatchBed = {
-    //       method: "PATCH",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify(dataUpdateBedState),
-    //       };
-    //       fetch(apiUrlPatchBed, requestOptionsPatchBed)
-    //             .then((response) => response.json())
-    //             .then((res) => {});
-    const apiUrlPatchTriage = "http://localhost:8080/UpdateTriagestate";
-    const requestOptionsPatchTriage = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dataUpdateTriageState),
-    };
-    fetch(apiUrlPatchTriage, requestOptionsPatchTriage)
-      .then((response) => response.json())
-      .then((res) => { });
 
     // reset All after Submit
     setTriageID("");
@@ -233,7 +214,7 @@ function MappingBedCreate() {
   //=======================================================================================================================================
   //function fethch data จาก backend
   const getMappigBed = async () => {
-    const apiUrl = "http://localhost:8080/GetListSymptoms";
+    const apiUrl = "http://localhost:8080/GetListMapBeds";
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -242,7 +223,7 @@ function MappingBedCreate() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          console.log("hhh");
+          console.log(res.data);
           
           // setFiltertriages(res.data)
         }else{

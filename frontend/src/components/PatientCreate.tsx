@@ -17,6 +17,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ResponsiveAppBar from './Bar_01';
+import { kMaxLength } from "buffer";
 
 
 //ฟังค์ชันสำหรับ alert
@@ -297,7 +298,8 @@ return (
                type="string"
                size="medium"
                value={patient.ID_Card || ""}
-               onChange={handleInputChange}     
+               onChange={handleInputChange}   
+               inputProps={{MaxLength:13}}  
              />
            </FormControl>
          </Grid>
@@ -457,7 +459,7 @@ return (
                   fullWidth
                   multiline
                   rows={4}
-                  value={patient.Addess}
+                  value={patient.Addess||""}
                   onChange={handleInputChange} 
                 />
               </Grid>
