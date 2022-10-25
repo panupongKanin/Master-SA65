@@ -72,6 +72,10 @@ func SetupDatabase() {
 		&BASKET{},
 		&MEDICINE{},
 
+		// 07
+		&VisitorType{},
+		&VisitRecord{},
+
 	)
 
 	//TODO 05 Manage
@@ -121,6 +125,10 @@ func SetupDatabase() {
 	// database.Create(&WHERE{Name: "ห้องผู้ป่วย VIP"})
 	// database.Create(&WHERE{Name: "ห้องฉุกเฉิน"})
 	// database.Create(&WHERE{Name: "ไปรษณีย์"})
+
+	//TODO 07
+	// database.Create(&VisitorType{Name: "ญาติผู้ป่วย"})
+	// database.Create(&VisitorType{Name: "อื่นๆ"})
   db = database
   
 

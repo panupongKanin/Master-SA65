@@ -123,6 +123,8 @@ function HomePage_01() {
                                     <Grid item xs={6} md={3}>
                                           <Card sx={{ maxWidth: 345 }}>
                                                 <CardActionArea
+                                                      component={RouterLink}
+                                                      to="/VisitRecordCreate"
                                                       sx={{ backgroundColor: "#FDDD8E" }}>
                                                       <CardMedia
                                                             component="img"
@@ -208,6 +210,16 @@ function HomePage_01() {
                   </Container>
                   <br />
                   <br />
+                  <Box
+                        sx={{
+                              height: 300,
+                              backgroundColor: '#007B7D',
+                              '&:hover': {
+                                    backgroundColor: '#007B7D',
+                                    opacity: [0.9, 0.8, 0.7],
+                              },
+                        }}
+                  />
             </Paper>
 
       );

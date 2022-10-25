@@ -17,6 +17,7 @@ import SymptomCreate from "./components/SymptomCreate";
 import tttt from "./components/tttt";
 import BasicGrid from "./components/tttt";
 import BASKETCreate from "./components/MedicineCreate";
+import VisitRecordCreate from "./components/VisitRecordCreate";
 
 export default function App() {
 
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/Manage" element={<Manage />} />
         <Route path="/SymptomCreate" element={<SymptomCreate />} />
         <Route path="/BASKETCreate" element={<BASKETCreate />} />
+        <Route path="/VisitRecordCreate" element={<VisitRecordCreate />} />
         
         
 

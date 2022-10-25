@@ -97,7 +97,7 @@ func main() {
 	r.GET("/ListManage", controller.ListManage)
 
 
-	// ====================== 07 ===============================
+	// ====================== 06 ===============================
 
 	r.GET("/ListMedicine", controller.ListMedicine)
 	r.GET("/ListWhere", controller.ListWhere)
@@ -105,13 +105,26 @@ func main() {
 	r.GET("/ListBasket", controller.ListBasket)
 	r.POST("/CreateBasket", controller.CreateBasket)
 
+	//  TODO ==================== 07 ==========================
+	// POST /visitrecord
+	r.POST("/CreateVisitRecord", controller.CreateVisitRecord)
+	// GET /visitrecord/:id
+	r.GET("/GetVisitRecord/:id", controller.GetVisitRecord)
+	// GET /visitrecord
+	r.GET("/ListVisitRecords", controller.ListVisitRecords)
+
+	// POST /visitortypes
+	r.POST("/CreateVisitorType", controller.CreateVisitorType)
+	// GET /visitortype/:id
+	r.GET("/GetVisitorType/:id", controller.GetVisitorType)
+	// GET / visitortype
+	r.GET("/ListVisitorTypes", controller.ListVisitorTypes)
+
 	
 	r.POST("/signup", controller.CreateUser)
 	// login User Route
 	r.POST("/login", controller.Login)
 	r.GET("/user/:id", controller.GetUser)
-
-
 
 	r.Run()
 }

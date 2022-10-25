@@ -32,7 +32,7 @@ function ResponsiveAppBar_01() {
             variant="h6"
             noWrap
             component="a"
-            href="/HomePage2"
+            href="/HomePage1"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -97,10 +97,9 @@ function ResponsiveAppBar_01() {
             บันทึกการใช้งานเตียงคนไข้ใน
           </Typography>
            <Typography
-
             noWrap
             component="a"
-            href="/mappingbedcreate"
+            href="/VisitRecordCreate"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -116,6 +115,7 @@ function ResponsiveAppBar_01() {
             เพิ่มข้อมูลการเข้าเยี่ยมคนไข้ใน
           </Typography>
           <Typography
+          
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },

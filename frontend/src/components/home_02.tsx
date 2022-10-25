@@ -215,6 +215,16 @@ function HomePage_02() {
                   </Container>
                   <br />
                   <br />
+                  <Box
+                        sx={{
+                              height: 300,
+                              backgroundColor: '#007B7D',
+                              '&:hover': {
+                                    backgroundColor: '#007B7D',
+                                    opacity: [0.9, 0.8, 0.7],
+                              },
+                        }}
+                  />
             </Paper>
       );
 }

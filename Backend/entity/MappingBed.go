@@ -35,8 +35,9 @@ type Map_Bed struct{
 	User_ID 		*uint
 	User    		User 		`gorm:"references:id"`
 
-	Manage 		[]Manage 	`gorm:"ForeignKey:Map_BedID"`
-	Symptom 		[]Symptom 	`gorm:"ForeignKey:MapbID"`
+	Manages 		[]Manage 	`gorm:"ForeignKey:Map_BedID"`
+	symptoms 		[]Symptom 	`gorm:"ForeignKey:MapbID"`
+	
 
 }
 
