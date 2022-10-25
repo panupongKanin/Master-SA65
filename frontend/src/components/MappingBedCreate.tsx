@@ -61,7 +61,7 @@ function MappingBedCreate() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const userID = parseInt(localStorage.getItem("uid")+"");
+  const userID = parseInt(localStorage.getItem("uid") + "");
   // console.log(userID);
 
   //=======================================================================================================================================
@@ -224,11 +224,11 @@ function MappingBedCreate() {
       .then((res) => {
         if (res.data) {
           console.log(res.data);
-          
+
           // setFiltertriages(res.data)
-        }else{
+        } else {
           console.log("error");
-          
+
         }
       });
   };
@@ -341,9 +341,21 @@ function MappingBedCreate() {
               marginX: 2,
             }}
           >
-            <h2>
-              ระบบบันทึกการใช้งานเตียง
-            </h2>
+            <Box sx={{ paddingX: 18, paddingY: 1 }}>
+              <Typography
+                component="h2"
+                variant="h4"
+                color="#558b2f"
+                gutterBottom
+                //align="center"
+                fontFamily="Arial"
+              >
+                <hr color="Green" />
+                <b>ระบบบันทึกการใช้งานเตียงคนไข้ใน</b>
+                <hr color="Green" />
+              </Typography>
+            </Box>
+
           </Box>
           <hr />
           <Grid container spacing={2} sx={{ padding: 2 }}>
@@ -513,7 +525,7 @@ function MappingBedCreate() {
 
             </Grid>
             <Grid item xs={12}>
-              <Button sx = {{backgroundColor: "#C70039"}} component={RouterLink} to="/HomePage1" variant="contained">
+              <Button sx={{ backgroundColor: "#C70039" }} component={RouterLink} to="/HomePage1" variant="contained">
                 ย้อนกลับ
               </Button>
               <Button

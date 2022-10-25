@@ -267,15 +267,18 @@ function Manage() {
                 paddingY: 0,
               }}
             >
-              <Box sx={{ paddingX: 2, paddingY: 1 }}>
+              <Box sx={{ paddingX: 16, paddingY: 1 }}>
                 <Typography
-                  variant="h4"
                   component="h2"
-                  color="primary"
+                  variant="h4"
+                  color="#558b2f"
                   gutterBottom
-                  sx={{ paddingTop: 2 }}
+                  //align="center"
+                  fontFamily="Arial"
                 >
-                  โภชนาการ
+                  <hr color="Green" />
+                  <b>ระบบเพิ่มโภชนาการสำหรับคนไข้ใน</b>
+                  <hr color="Green" />
                 </Typography>
               </Box>
             </Box>
@@ -388,18 +391,20 @@ function Manage() {
                 />
               </Grid>
               <Grid item xs={12}>
-              <Button sx = {{backgroundColor: "#C70039"}} component={RouterLink} to="/HomePage2" variant="contained">
-                ย้อนกลับ
-              </Button>
-              <Button
-                style={{ float: "right" }}
-                onClick={submit}
-                variant="contained"
-                color="success"
-              >
-                <b>บันทึก</b>
-              </Button>
-            </Grid>
+                <Button sx={{ backgroundColor: "#C70039", marginY: 3 }} component={RouterLink} to="/HomePage2" variant="contained">
+                  ย้อนกลับ
+                </Button>
+                <Button
+                  style={{ float: "right" }}
+                  sx={{ marginY: 3 }}
+                  onClick={submit}
+                  variant="contained"
+                  color="success"
+                >
+                  <b>บันทึก</b>
+                </Button>
+
+              </Grid>
             </Grid>
           </Paper>
         </Box>

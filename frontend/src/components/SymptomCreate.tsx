@@ -17,6 +17,7 @@ import ResponsiveAppBar from './Bar_02';
 
 import { MappingBedInterface } from "../interfaces/MapBedUI";
 import { LevelInterface, SymptomInterface } from "../interfaces/SymptomUI";
+import { Typography } from "@mui/material";
 
 
 function SymptomCreate() {
@@ -187,7 +188,20 @@ function SymptomCreate() {
               marginTop: 2,
               marginX: 2,
             }}>
-            <h2 >ระบบติดตามอาการคนไข้</h2>
+            <Box sx={{ paddingX: 26, paddingY: 1 }}>
+              <Typography
+                component="h2"
+                variant="h4"
+                color="#558b2f"
+                gutterBottom
+                //align="center"
+                fontFamily="Arial"
+              >
+                <hr color="Green" />
+                <b>ระบบติดตามอาการคนไข้ใน</b>
+                <hr color="Green" />
+              </Typography>
+            </Box>
           </Box><hr></hr>
           <Box>
             <Grid container spacing={0} sx={{ marginX: 17 }}>

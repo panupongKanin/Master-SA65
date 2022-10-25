@@ -59,7 +59,7 @@ function ResponsiveAppBar_02() {
               textDecoration: 'none',
             }}
           >
-            เพิ่มข้อมูลผู้ป่วยใน
+            เพิ่มข้อมูลคนไข้ใน
           </Typography>
           <Typography
 
@@ -76,7 +76,7 @@ function ResponsiveAppBar_02() {
               textDecoration: 'none',
             }}
           >
-            คัดแยกผู้ป่วย
+            คัดแยกคนไข้ใน
           </Typography>
           <Typography
 
@@ -94,7 +94,7 @@ function ResponsiveAppBar_02() {
             }}
 
           >
-            บันทึกการใช้งานเตียง
+            บันทึกการใช้งานเตียงคนไข้ใน
           </Typography>
            <Typography
 
@@ -113,7 +113,7 @@ function ResponsiveAppBar_02() {
             }}
 
           >
-            เพิ่มข้อมูลการเข้าเยี่ยม
+            เพิ่มข้อมูลการเข้าเยี่ยมคนไข้ใน
           </Typography>
           <Typography
             sx={{

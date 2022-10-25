@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 
 import ResponsiveAppBar from './Bar_01';
 import { Link as RouterLink } from "react-router-dom";
-import {InpantientDepartmentInterface, DiseaseInterface,DiseaseTypeInterface, TriagesInterface } from '../interfaces/TriageUI';
+import { InpantientDepartmentInterface, DiseaseInterface, DiseaseTypeInterface, TriagesInterface } from '../interfaces/TriageUI';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
       props,
@@ -269,9 +269,20 @@ function TriagePageCreate() {
                                           marginX: 2,
                                     }}
                               >
-                                    <h2>
-                                          ระบบคัดแยกผู้ป่วย
-                                    </h2>
+                                    <Box sx={{ paddingX: 28, paddingY: 1 }}>
+                                          <Typography
+                                                component="h2"
+                                                variant="h4"
+                                                color="#558b2f"
+                                                gutterBottom
+                                                //align="center"
+                                                fontFamily="Arial"
+                                          >
+                                                <hr color="Green" />
+                                                <b>ระบบคัดแยกคนไข้ใน</b>
+                                                <hr color="Green" />
+                                          </Typography>
+                                    </Box>
                               </Box>
                               <hr />
                               <Grid container spacing={2} sx={{ padding: 2 }}>

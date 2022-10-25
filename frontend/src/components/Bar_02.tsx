@@ -59,7 +59,7 @@ function ResponsiveAppBar_02() {
               textDecoration: 'none',
             }}
           >
-            ติดตามอาการผู้ป่วย
+            ติดตามอาการคนไข้
           </Typography>
           <Typography
 
@@ -76,7 +76,7 @@ function ResponsiveAppBar_02() {
               textDecoration: 'none',
             }}
           >
-            โภชนาการ
+            โภชนาการสำหรับคนไข้ใน
           </Typography>
           <Typography
 
@@ -94,7 +94,7 @@ function ResponsiveAppBar_02() {
             }}
 
           >
-            การจ่ายยา
+            การจ่ายยาสำหรับคนไข้ใน
           </Typography>
           <Typography
             sx={{

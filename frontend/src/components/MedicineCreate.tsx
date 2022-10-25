@@ -20,6 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import dayjs, { Dayjs } from "dayjs";
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import ResponsiveAppBar from './Bar_02';
 
 
 //ฟังค์ชันสำหรับ alert
@@ -51,7 +52,7 @@ function BASKETCreate() {
   const [med, setMed] = useState("");
   const [userName, setUserName] = useState('');
 
-  const userID = parseInt(localStorage.getItem("uid")+"");
+  const userID = parseInt(localStorage.getItem("uid") + "");
 
   console.log(userName);
 
@@ -117,13 +118,13 @@ function BASKETCreate() {
       Add_time: Add_time,
       WHERE_ID: convertType(WHERE_ID),          //GenderID != patient.GenderID บรรทัดนี้ น้ำค่า GenderID ที่ประกาศไว้ด้านบนมาใช้เลย 
       MEDICINE_ID: convertType(MEDICINE_ID),
-      Symptom_ID:convertType(Symptom_ID),
+      Symptom_ID: convertType(Symptom_ID),
       User_ID: convertType(userID),
 
     };
 
     console.log(data);
-    
+
 
     //check data
 
@@ -257,7 +258,7 @@ function BASKETCreate() {
       .then((res) => {
         if (res.data) {
           setUserName(res.data.Name);
-        } 
+        }
       });
   };
 
@@ -276,291 +277,297 @@ function BASKETCreate() {
   //////////////////////////////////////////////////////////////////////////////-_ ส่วนนี้คือส่วนที่กำหนด UI _-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <Container maxWidth="md">
-      <Snackbar
-        open={success}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert onClose={handleClose} severity="success">
-          บันทึกข้อมูลสำเร็จ
-        </Alert>
-      </Snackbar>
-
-      <Snackbar open={error}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-
-        <Alert onClose={handleClose} severity="error">
-          บันทึกข้อมูลไม่สำเร็จ
-        </Alert>
-      </Snackbar>
-
-
-      <Paper >
-
-        <Box
-          display="flex"
-          sx={{
-            marginTop: 2,
-          }}
+    <Paper>
+      <ResponsiveAppBar />
+      <Container maxWidth="md">
+        <Snackbar
+          open={success}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
-          <Box sx={{ paddingX: 1, paddingY: 1 }}>
-            <Typography
-              color="#558b2f"
-              gutterBottom
-              //align="center"
-              fontFamily="Arial"
-            >
-              <hr color="Green" />
-              <b>ระบบจ่ายยาผู้ป่วยใน</b>
-              <hr color="Green" />
-            </Typography>
-          </Box>
-        </Box>
-        <Divider />
+          <Alert onClose={handleClose} severity="success">
+            บันทึกข้อมูลสำเร็จ
+          </Alert>
+        </Snackbar>
 
-        <Grid container spacing={2} sx={{ padding: 2 }}>
-          <Grid item xs={1}>
-            {/* <FormControl fullWidth variant="outlined"> */}
-            <p>ผู้ป่วย</p>
-          </Grid>
-          <Grid item xs={10}>
-            <FormControl fullWidth variant="outlined">
-              <Select
-                native
-                value={Symptom_ID}
-                onChange={onChangeSymptom}
-                inputProps={{
-                  name: "Symtomp_ID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกผู้ป่วย
-                </option>
-                {Symtomp.map((item) => (
-                  <option value={item.ID} key={item.ID}>
-                    เตียง : {item.Mapb.Bed.Bed_Name} - ชื่อ {item.Mapb.Triage.Patient.Patient_Name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+        <Snackbar open={error}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
 
-          <Grid item xs={4}>
-            <p>อุณหภูมิ</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={temp}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <p>ความดัน</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={press}
-              InputProps={{
-                readOnly: true,
-
-              }}
-
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <p>อัตราการเต้นของหัวใจ</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={hrate}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <p>อาการ</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={comm}
-              multiline
-              rows={4}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <p>ยาที่คนไข้ต้องการใช้</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={med}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
+          <Alert onClose={handleClose} severity="error">
+            บันทึกข้อมูลไม่สำเร็จ
+          </Alert>
+        </Snackbar>
 
 
-        </Grid>
+        <Paper >
 
 
-        <Grid container spacing={4} sx={{ padding: 2 }}>
-
-          {/* <Grid  container spacing={2} sx={{padding:2}}> */}
-
-          <Grid item xs={0}>
-            {/* <FormControl fullWidth variant="outlined"> */}
-            <p>ชื่อยา</p>
-          </Grid>
-          <Grid item xs={7}>
-            <FormControl fullWidth variant="outlined">
-              <Select
-                native
-                value={MEDICINE_ID}
-                onChange={onChangeMEDICINE}
-                inputProps={{
-                  name: "MEDICINE_ID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกยา
-                </option>
-                {MEDICINE.map((item: MEDICINEInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name} - {item.So} - {item.Unit}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={0}>
-            <p>จำนวน</p>
-          </Grid>
-          <Grid item xs={2}>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                id="ID"
-                variant="outlined"
-                type="string"
-                size="medium"
-                value={BASKET.ID || ""}
-                onChange={handleInputChange}
-              />
-            </FormControl>
-          </Grid>
-
-
-        </Grid>
-
-        <Grid container spacing={4} sx={{ padding: 2 }}>
-
-          <Grid item xs={1}>
-            {/* <FormControl fullWidth variant="outlined"> */}
-            <p>รับยา</p>
-          </Grid>
-          <Grid item xs={3}>
-            <FormControl fullWidth variant="outlined">
-              <Select
-                native
-                value={WHERE_ID}
-                onChange={onChangeWHERE}
-                inputProps={{
-                  name: "WHERE_ID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกสถานที่
-                </option>
-                {WHERE.map((item: WHEREInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={2}>
-            {/* <FormControl fullWidth variant="outlined"> */}
-            <p>เวลาจ่ายยา</p>
-          </Grid>
-          <Grid item xs={5}>
-            <FormControl fullWidth variant="outlined">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                  renderInput={(props) => <TextField {...props} />}
-                  label="เลือกเวลาจ่ายยาผู้ป่วยใน"
-                  value={Add_time}
-                  onChange={(newValue) => {
-                    setDate(newValue);
-                  }}
-                />
-              </LocalizationProvider>
-            </FormControl>
-          </Grid>
-
-
-
-        </Grid>
-
-        <Grid container spacing={2} sx={{ padding: 2 }}>
-
-          <Grid item xs={1}>
-            {/* <FormControl fullWidth variant="outlined"> */}
-            <p>ผู้จ่าย</p>
-          </Grid>
-          <Grid item xs={10}>
-            <FormControl fullWidth variant="outlined">
-              <Select
-                native
-                value={userName}
-                onChange={onChangeDOCTOR}
-                inputProps={{
-                  name: "DOCTOR_ID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกผู้จ่ายยา
-                </option>
-                <option aria-label="None" value={userName}>
-                  {userName}
-                </option>
-                
-              </Select>
-            </FormControl>
-          </Grid>
-
-
-
-        </Grid>
-        <Grid item xs={12}>
-          <Button sx={{ backgroundColor: "#C70039" }} component={RouterLink} to="/HomePage2" variant="contained">
-            ย้อนกลับ
-          </Button>
-          <Button
-            style={{ float: "right" }}
-            onClick={submit}
-            variant="contained"
-            color="success"
+          <Box
+            display="flex"
+            sx={{
+              marginTop: 2,
+            }}
           >
-            <b>บันทึก</b>
-          </Button>
+            <Box sx={{ paddingX: 26, paddingY: 1 }}>
+              <Typography
+                component="h2"
+                variant="h4"
+                color="#558b2f"
+                gutterBottom
+                //align="center"
+                fontFamily="Arial"
+              >
+                <hr color="Green" />
+                <b>ระบบจ่ายยาสำหรับคนไข้ใน</b>
+                <hr color="Green" />
+              </Typography>
+            </Box>
+          </Box>
+          <Divider />
 
-        </Grid>
-        <br />
-      </Paper>
-    </Container>
+          <Grid container spacing={2} sx={{ padding: 2 }}>
+            <Grid item xs={1}>
+              {/* <FormControl fullWidth variant="outlined"> */}
+              <p>ผู้ป่วย</p>
+            </Grid>
+            <Grid item xs={10}>
+              <FormControl fullWidth variant="outlined">
+                <Select
+                  native
+                  value={Symptom_ID}
+                  onChange={onChangeSymptom}
+                  inputProps={{
+                    name: "Symtomp_ID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกผู้ป่วย
+                  </option>
+                  {Symtomp.map((item) => (
+                    <option value={item.ID} key={item.ID}>
+                      เตียง : {item.Mapb.Bed.Bed_Name} - ชื่อ {item.Mapb.Triage.Patient.Patient_Name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={4}>
+              <p>อุณหภูมิ</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={temp}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <p>ความดัน</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={press}
+                InputProps={{
+                  readOnly: true,
+
+                }}
+
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <p>อัตราการเต้นของหัวใจ</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={hrate}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <p>อาการ</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={comm}
+                multiline
+                rows={4}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <p>ยาที่คนไข้ต้องการใช้</p>
+              <TextField
+                fullWidth
+                id="outlined-read-only-input"
+                value={med}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </Grid>
+
+
+          </Grid>
+
+
+          <Grid container spacing={4} sx={{ padding: 2 }}>
+
+            {/* <Grid  container spacing={2} sx={{padding:2}}> */}
+
+            <Grid item xs={0}>
+              {/* <FormControl fullWidth variant="outlined"> */}
+              <p>ชื่อยา</p>
+            </Grid>
+            <Grid item xs={7}>
+              <FormControl fullWidth variant="outlined">
+                <Select
+                  native
+                  value={MEDICINE_ID}
+                  onChange={onChangeMEDICINE}
+                  inputProps={{
+                    name: "MEDICINE_ID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกยา
+                  </option>
+                  {MEDICINE.map((item: MEDICINEInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Name} - {item.So} - {item.Unit}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={0}>
+              <p>จำนวน</p>
+            </Grid>
+            <Grid item xs={2}>
+              <FormControl fullWidth variant="outlined">
+                <TextField
+                  id="ID"
+                  variant="outlined"
+                  type="string"
+                  size="medium"
+                  value={BASKET.ID || ""}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+            </Grid>
+
+
+          </Grid>
+
+          <Grid container spacing={4} sx={{ padding: 2 }}>
+
+            <Grid item xs={1}>
+              {/* <FormControl fullWidth variant="outlined"> */}
+              <p>รับยา</p>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl fullWidth variant="outlined">
+                <Select
+                  native
+                  value={WHERE_ID}
+                  onChange={onChangeWHERE}
+                  inputProps={{
+                    name: "WHERE_ID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกสถานที่
+                  </option>
+                  {WHERE.map((item: WHEREInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={2}>
+              {/* <FormControl fullWidth variant="outlined"> */}
+              <p>เวลาจ่ายยา</p>
+            </Grid>
+            <Grid item xs={5}>
+              <FormControl fullWidth variant="outlined">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker
+                    renderInput={(props) => <TextField {...props} />}
+                    label="เลือกเวลาจ่ายยาผู้ป่วยใน"
+                    value={Add_time}
+                    onChange={(newValue) => {
+                      setDate(newValue);
+                    }}
+                  />
+                </LocalizationProvider>
+              </FormControl>
+            </Grid>
+
+
+
+          </Grid>
+
+          <Grid container spacing={2} sx={{ padding: 2 }}>
+
+            <Grid item xs={1}>
+              {/* <FormControl fullWidth variant="outlined"> */}
+              <p>ผู้จ่าย</p>
+            </Grid>
+            <Grid item xs={10}>
+              <FormControl fullWidth variant="outlined">
+                <Select
+                  native
+                  value={userName}
+                  onChange={onChangeDOCTOR}
+                  inputProps={{
+                    name: "DOCTOR_ID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกผู้จ่ายยา
+                  </option>
+                  <option aria-label="None" value={userName}>
+                    {userName}
+                  </option>
+
+                </Select>
+              </FormControl>
+            </Grid>
+
+
+
+          </Grid>
+          <Grid item xs={12}>
+            <Button sx={{ backgroundColor: "#C70039" ,marginX:3}} component={RouterLink} to="/HomePage2" variant="contained">
+              ย้อนกลับ
+            </Button>
+            <Button
+              style={{ float: "right" }}
+              onClick={submit}
+              variant="contained"
+              color="success"
+              sx ={{marginX:3}}
+            >
+              <b>บันทึก</b>
+            </Button>
+          </Grid>
+          <br />
+        </Paper>
+      </Container>
+    </Paper>
   );
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -276,7 +276,7 @@ return (
              fontFamily="Arial"
            >
              <hr color="Green"/>
-             <b>ระบบบันทึกข้อมูลผู้ป่วยใน</b>
+             <b>ระบบบันทึกข้อมูลคนไข้ในใน</b>
              <hr color="Green"/>
            </Typography>
          </Box>
