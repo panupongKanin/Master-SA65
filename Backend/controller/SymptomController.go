@@ -83,8 +83,8 @@ func CreateSymptom(c *gin.Context) {
 		Heart_rate:  symptom.Heart_rate,
 		Comment:     symptom.Comment,
 		Medicine:    symptom.Medicine,
-		Check:       user,   // โยงความสัมพันธ์กับ Entity User
-		Level:       level,  // โยงความสัมพันธ์กับ Entity Level
+		CheckID:     symptom.CheckID,   // โยงความสัมพันธ์กับ Entity User
+		LevelID:     symptom.LevelID,  // โยงความสัมพันธ์กับ Entity Level
 		MapbID: symptom.MapbID, // โยงความสัมพันธ์กับ Entity Map_Bed
 	}
 

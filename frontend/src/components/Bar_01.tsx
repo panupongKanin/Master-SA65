@@ -18,7 +18,7 @@ import { FormControl } from '@mui/material';
 import { Link as RouterLink } from "react-router-dom";
 
 
-function ResponsiveAppBar_02() {
+function ResponsiveAppBar_01() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -135,4 +135,4 @@ function ResponsiveAppBar_02() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar_02;
+export default ResponsiveAppBar_01;

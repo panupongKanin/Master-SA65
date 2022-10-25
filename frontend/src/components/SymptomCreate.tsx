@@ -198,7 +198,7 @@ function SymptomCreate() {
                 fontFamily="Arial"
               >
                 <hr color="Green" />
-                <b>ระบบติดตามอาการคนไข้ใน</b>
+                <b>ระบบติดตามอาการคนไข้</b>
                 <hr color="Green" />
               </Typography>
             </Box>

@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { MEDICINEInterface, WHEREInterface, DOCTORInterface, BASKETInterface } from "../interfaces/MedicineInterface";
+import { MEDICINEInterface, WHEREInterface, DOCTORInterface, BASKETInterface } from "../interfaces/MedicineUI";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

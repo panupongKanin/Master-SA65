@@ -262,7 +262,6 @@ function Manage() {
               sx={{
                 marginTop: 3,
                 marginX: 2,
-
                 paddingX: 2,
                 paddingY: 0,
               }}
