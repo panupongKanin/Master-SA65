@@ -72,7 +72,7 @@ function HomePage_02() {
                                                       />
                                                       <CardContent>
                                                             <Typography gutterBottom variant="h5" component="div" align='center' >
-                                                                  บันทึกผู้ป่วย
+                                                                  บันทึกคนไข้ใน
                                                             </Typography>
 
                                                       </CardContent>
@@ -94,7 +94,7 @@ function HomePage_02() {
                                                       />
                                                       <CardContent>
                                                             <Typography gutterBottom variant="h5" component="div" align='center'>
-                                                                  คัดแยกผู้ป่วย
+                                                                  คัดแยกคนไข้ใน
                                                             </Typography>
 
                                                       </CardContent>
@@ -161,7 +161,7 @@ function HomePage_02() {
                                                       />
                                                       <CardContent >
                                                             <Typography gutterBottom variant="h5" component="div" align='center'>
-                                                                  ติดตามอาการผู้ป่วย
+                                                                  ติดตามอาการคนไข้
                                                             </Typography>
                                                       </CardContent>
                                                 </CardActionArea>
@@ -181,7 +181,7 @@ function HomePage_02() {
                                                       />
                                                       <CardContent >
                                                             <Typography gutterBottom variant="h5" component="div" align='center'>
-                                                                  โภชนาการ
+                                                                  เพิ่มโภชนาการ
                                                             </Typography>
 
                                                       </CardContent>

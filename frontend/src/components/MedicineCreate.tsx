@@ -327,7 +327,13 @@ function BASKETCreate() {
               </Typography>
             </Box>
           </Box>
-          <Divider />
+          <hr />
+          <Box>
+            <FormControl fullWidth>
+              <img src="https://i.postimg.cc/SRzHgtww/07.jpg" />
+            </FormControl>
+          </Box>
+          <hr />
 
           <Grid container spacing={2} sx={{ padding: 2 }}>
             <Grid item xs={1}>

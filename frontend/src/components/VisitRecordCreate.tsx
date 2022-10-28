@@ -276,27 +276,13 @@ export default function VisitRecordCreate() {
               </Typography>
             </Box>
           </Box>
-          {/* <Box
-            display={"flex"}
-            sx={{
-              marginTop: 1,
-              paddingY: 1,
-              paddingX: 1,
-            }}>
-            <Typography
-             component="h2"
-             variant="h4"
-             color= "#558b2f"
-             gutterBottom
-             //align="center"
-             fontFamily="Arial"
-             align="right"
-           >
-             <hr color="Green"/>
-             <b>ระบบเพิ่มข้อมูลการเข้าเยี่ยมผู้ป่วย</b>
-             <hr color="Green"/>
-           </Typography>
-          </Box> */}
+          
+          <hr />
+          <Box>
+            <FormControl fullWidth>
+              <img src="https://i.postimg.cc/13RBKb0j/04.png" />
+            </FormControl>
+          </Box>
           <hr />
           <Grid container spacing={1}
             sx={{

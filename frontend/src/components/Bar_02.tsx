@@ -21,6 +21,11 @@ import { Link as RouterLink } from "react-router-dom";
 function ResponsiveAppBar_02() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
 
 
   return (
@@ -76,7 +81,7 @@ function ResponsiveAppBar_02() {
               textDecoration: 'none',
             }}
           >
-            โภชนาการสำหรับคนไข้ใน
+            เพิ่มโภชนาการ
           </Typography>
           <Typography
 
@@ -94,7 +99,7 @@ function ResponsiveAppBar_02() {
             }}
 
           >
-            การจ่ายยาสำหรับคนไข้ใน
+            การจ่ายยา
           </Typography>
           <Typography
             sx={{
@@ -106,7 +111,7 @@ function ResponsiveAppBar_02() {
               flexGrow: 1,
             }}
           />
-          <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
+          <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" onClick={logout} >
              LOGOUT
            </Button>
       

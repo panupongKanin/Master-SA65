@@ -285,6 +285,12 @@ function TriagePageCreate() {
                                     </Box>
                               </Box>
                               <hr />
+                              <Box>
+                                    <FormControl fullWidth>
+                                          <img src="https://i.postimg.cc/Z5rHwh08/02.png" />
+                                    </FormControl>
+                              </Box>
+                              <hr />
                               <Grid container spacing={2} sx={{ padding: 2 }}>
                                     <Grid item xs={10}>
                                           <p>ชื่อผู้ป่วย</p>

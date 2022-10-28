@@ -22,6 +22,11 @@ function ResponsiveAppBar_01() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
 
   return (
     <AppBar position="static" sx={{ bgcolor: "#024142" }} >
@@ -125,7 +130,7 @@ function ResponsiveAppBar_01() {
               flexGrow: 1,
             }}
           />
-          <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" component={RouterLink} to="/">
+          <Button sx = {{backgroundColor: "#003D2E"}}  variant="contained" onClick={logout}>
              LOGOUT
            </Button>
       

@@ -14,8 +14,6 @@ import HomePage_02 from "./components/home_02";
 import TriagePageCreate from "./components/TriagesPage";
 import Manage from "./components/Manage";
 import SymptomCreate from "./components/SymptomCreate";
-import tttt from "./components/tttt";
-import BasicGrid from "./components/tttt";
 import BASKETCreate from "./components/MedicineCreate";
 import VisitRecordCreate from "./components/VisitRecordCreate";
 
@@ -24,7 +22,7 @@ export default function App() {
   return (
 
     <Router>
-      <Routes>
+      <Routes >
         <Route path="/" element={<LogIn />} />
         <Route path="/HomePage1" element={<HomePage_01 />} />
         <Route path="/HomePage2" element={<HomePage_02 />} />
@@ -35,10 +33,6 @@ export default function App() {
         <Route path="/SymptomCreate" element={<SymptomCreate />} />
         <Route path="/BASKETCreate" element={<BASKETCreate />} />
         <Route path="/VisitRecordCreate" element={<VisitRecordCreate />} />
-        
-        
-
-
       </Routes>
     </Router>
 

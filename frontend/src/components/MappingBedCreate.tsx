@@ -14,6 +14,12 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ResponsiveAppBar from './Bar_01';
 import { Link as RouterLink } from "react-router-dom";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -62,7 +68,7 @@ function MappingBedCreate() {
   const [error, setError] = useState(false);
 
   const userID = parseInt(localStorage.getItem("uid") + "");
-  // console.log(userID);
+  console.log(triages);
 
   //=======================================================================================================================================
   //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
@@ -291,8 +297,6 @@ function MappingBedCreate() {
       .then((res) => {
         if (res.data) {
           setUserName(res.data.Name);
-        } else {
-          setBeds([]);
         }
       });
   };
@@ -333,215 +337,246 @@ function MappingBedCreate() {
       <ResponsiveAppBar />
 
       <Container maxWidth="md">
-        <Paper elevation={0}>
-          <Box
-            display={"flex"}
-            sx={{
-              marginTop: 2,
-              marginX: 2,
-            }}
-          >
-            <Box sx={{ paddingX: 18, paddingY: 1 }}>
-              <Typography
-                component="h2"
-                variant="h4"
-                color="#558b2f"
-                gutterBottom
-                //align="center"
-                fontFamily="Arial"
-              >
-                <hr color="Green" />
-                <b>ระบบบันทึกการใช้งานเตียงคนไข้ใน</b>
-                <hr color="Green" />
-              </Typography>
-            </Box>
+
+        <Box
+          display={"flex"}
+          sx={{
+            marginTop: 2,
+            marginX: 2,
+          }}
+        >
+          <Box sx={{ paddingX: 18, paddingY: 1 }}>
+            <Typography
+              component="h2"
+              variant="h4"
+              color="#558b2f"
+              gutterBottom
+              //align="center"
+              fontFamily="Arial"
+            >
+              <hr color="Green" />
+              <b>ระบบบันทึกการใช้งานเตียงคนไข้ใน</b>
+              <hr color="Green" />
+            </Typography>
 
           </Box>
-          <hr />
-          <Grid container spacing={2} sx={{ padding: 2 }}>
-            <Grid item xs={10}>
-              <p>ชื่อผู้ป่วย</p>
-              <FormControl fullWidth >
-                <Select
-                  id="Patient_Name"
-                  value={triageID}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                  onChange={onChangeTriage}
-                >
-                  <MenuItem value="">
-                    กรุณาเลือกผู้ป่วย
-                  </MenuItem>
+        </Box>
+
+        <hr />
+        <Box>
+          <FormControl fullWidth>
+            <img src="https://i.postimg.cc/PfLM3mwd/03.png" />
+          </FormControl>
+        </Box>
+        <hr />
+
+        <Grid container spacing={2} sx={{ padding: 2 }}>
+          <Grid item xs={12}>
+            <p>ชื่อคนไข้ที่ต้องการเตียง</p>
+            <TableContainer component={Paper} className="">
+              <Table className="" aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center" width="20%">
+                      ลำดับการคัดแยก
+                    </TableCell>
+                    <TableCell align="center" width="80%">
+                      ชื่อผู้ป่วย
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                   {triages.map(triage => (
-                    <MenuItem value={triage.ID} key={triage.ID}>
-                      {triage.Patient.Patient_Name}
-                    </MenuItem>
+                    <TableRow key={triage.ID}>
+                      <TableCell align="center">{triage.ID}</TableCell>
+                      <TableCell align="center">{triage.Patient.Patient_Name}</TableCell>
+                    </TableRow>
                   ))}
-                </Select>
-              </FormControl>
-
-            </Grid>
-            <Grid item xs={2} >
-
-              <Button
-                onClick={search}
-                variant="contained"
-                color="primary"
-                sx={{ marginTop: 8 }}
-              >
-                ค้นหา
-              </Button>
-
-            </Grid>
-            <Grid item xs={4}>
-              <p>เพศ</p>
-              <TextField
-                fullWidth
-                id="GenderType"
-                value={GenderType}
-                InputProps={{
-                  readOnly: true,
-                }}
-              />
-
-            </Grid>
-            <Grid item xs={4}>
-              <p>ประเภทโรค</p>
-              <TextField
-                fullWidth
-                id="outlined-read-only-input"
-                value={DiseaseType}
-                InputProps={{
-                  readOnly: true,
-
-                }}
-              />
-
-            </Grid>
-            <Grid item xs={4}>
-              <p>โรค</p>
-              <TextField
-                fullWidth
-                id="outlined-read-only-input"
-                value={Disease_Name}
-                InputProps={{
-                  readOnly: true,
-
-                }}
-              />
-
-            </Grid>
-            <Grid item xs={12}>
-              <p>แผนก</p>
-              <TextField
-                fullWidth
-                id="outlined-read-only-input"
-                value={IPD_Name}
-                InputProps={{
-                  readOnly: true,
-
-                }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <p>โซน</p>
-              <FormControl fullWidth>
-                <Select
-                  id="demo-select-small"
-                  value={zoneID}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                  onChange={onChangeZone}
-                >
-                  <MenuItem value="">
-                    กรุณาเลือกโซน
-                  </MenuItem>
-                  {Zones.map(zone => (
-                    <MenuItem value={zone.ID} key={zone.ID}>{zone.Zone_Name}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <p>เตียง</p>
-              <FormControl fullWidth>
-                <Select
-                  id="beds"
-                  value={bedID}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                  onChange={onChangeBed}
-                >
-                  <MenuItem value="">
-                    กรุณาเลือกเตียง
-                  </MenuItem>
-                  {Beds.map(bed => (
-                    <MenuItem value={bed.ID} key={bed.ID}>
-                      {bed.Bed_Name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-            </Grid>
-            <Grid item xs={4}>
-              <p>วันที่เข้ารับการรักษา</p>
-              <FormControl fullWidth variant="outlined">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    value={date}
-                    onChange={(newValue) => { setDate(newValue); }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <p>หมายเหตุ</p>
-              <FormControl fullWidth variant="outlined">
-                <TextField
-                  id="MapBed_Comment"
-                  variant="outlined"
-                  type="string"
-                  size="medium"
-                  value={comments}
-                  defaultValue=""
-                  onChange={handleInputChange}
-                />
-              </FormControl>
-
-            </Grid>
-            <Grid item xs={12}>
-              <p>ผู้บันทึก</p>
-              <TextField
-                fullWidth
-                id="outlined-read-only-input"
-                value={userName}
-                InputProps={{
-                  readOnly: true,
-
-                }}
-              />
-
-            </Grid>
-            <Grid item xs={12}>
-              <Button sx={{ backgroundColor: "#C70039" }}
-                component={RouterLink}
-                to="/HomePage1"
-                variant="contained">
-                  ย้อนกลับ
-              </Button>
-              <Button
-                style={{ float: "right" }}
-                onClick={submit}
-                variant="contained"
-                color="success"
-              >
-                <b>บันทึก</b>
-              </Button>
-            </Grid>
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
-        </Paper>
+          <Grid item xs={10}>
+            <p>ชื่อผู้ป่วย</p>
+            <FormControl fullWidth >
+              <Select
+                id="Patient_Name"
+                value={triageID}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+                onChange={onChangeTriage}
+              >
+                <MenuItem value="">
+                  กรุณาเลือกผู้ป่วย
+                </MenuItem>
+                {triages.map(triage => (
+                  <MenuItem value={triage.ID} key={triage.ID}>
+                    {triage.Patient.Patient_Name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={2} >
+
+            <Button
+              onClick={search}
+              variant="contained"
+              color="primary"
+              sx={{ marginTop: 8 }}
+            >
+              ค้นหา
+            </Button>
+
+          </Grid>
+          <Grid item xs={4}>
+            <p>เพศ</p>
+            <TextField
+              fullWidth
+              id="GenderType"
+              value={GenderType}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+
+          </Grid>
+          <Grid item xs={4}>
+            <p>ประเภทโรค</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={DiseaseType}
+              InputProps={{
+                readOnly: true,
+
+              }}
+            />
+
+          </Grid>
+          <Grid item xs={4}>
+            <p>โรค</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={Disease_Name}
+              InputProps={{
+                readOnly: true,
+
+              }}
+            />
+
+          </Grid>
+          <Grid item xs={12}>
+            <p>แผนก</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={IPD_Name}
+              InputProps={{
+                readOnly: true,
+
+              }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <p>โซน</p>
+            <FormControl fullWidth>
+              <Select
+                id="demo-select-small"
+                value={zoneID}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+                onChange={onChangeZone}
+              >
+                <MenuItem value="">
+                  กรุณาเลือกโซน
+                </MenuItem>
+                {Zones.map(zone => (
+                  <MenuItem value={zone.ID} key={zone.ID}>{zone.Zone_Name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={4}>
+            <p>เตียง</p>
+            <FormControl fullWidth>
+              <Select
+                id="beds"
+                value={bedID}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+                onChange={onChangeBed}
+              >
+                <MenuItem value="">
+                  กรุณาเลือกเตียง
+                </MenuItem>
+                {Beds.map(bed => (
+                  <MenuItem value={bed.ID} key={bed.ID}>
+                    {bed.Bed_Name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+          </Grid>
+          <Grid item xs={4}>
+            <p>วันที่เข้ารับการรักษา</p>
+            <FormControl fullWidth variant="outlined">
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  value={date}
+                  onChange={(newValue) => { setDate(newValue); }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <p>หมายเหตุ</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="MapBed_Comment"
+                variant="outlined"
+                type="string"
+                size="medium"
+                value={comments}
+                defaultValue=""
+                onChange={handleInputChange}
+              />
+            </FormControl>
+
+          </Grid>
+          <Grid item xs={12}>
+            <p>ผู้บันทึก</p>
+            <TextField
+              fullWidth
+              id="outlined-read-only-input"
+              value={userName}
+              InputProps={{
+                readOnly: true,
+
+              }}
+            />
+
+          </Grid>
+          <Grid item xs={12}>
+            <Button sx={{ backgroundColor: "#C70039" }}
+              component={RouterLink}
+              to="/HomePage1"
+              variant="contained">
+              ย้อนกลับ
+            </Button>
+            <Button
+              style={{ float: "right" }}
+              onClick={submit}
+              variant="contained"
+              color="success"
+            >
+              <b>บันทึก</b>
+            </Button>
+          </Grid>
+        </Grid>
       </Container>
     </Paper>
   );

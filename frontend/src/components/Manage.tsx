@@ -280,8 +280,13 @@ function Manage() {
                 </Typography>
               </Box>
             </Box>
-            <Divider />
-
+            <hr />
+            <Box>
+              <FormControl fullWidth>
+                <img src="https://i.postimg.cc/rFHvt4PD/06.png" />
+              </FormControl>
+            </Box>
+            <hr />
             <Grid
               container
               rowSpacing={1}

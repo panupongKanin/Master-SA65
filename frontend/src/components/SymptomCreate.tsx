@@ -73,7 +73,7 @@ function SymptomCreate() {
       MapbID: convertType(MapBedID),
     }
     console.log(data);
-    
+
     fetch("http://localhost:8080/CreateSymptom", {
       method: "POST",
       headers: {
@@ -113,7 +113,7 @@ function SymptomCreate() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          setMapbed(res.data);  
+          setMapbed(res.data);
         }
       });
   };
@@ -202,7 +202,14 @@ function SymptomCreate() {
                 <hr color="Green" />
               </Typography>
             </Box>
-          </Box><hr></hr>
+          </Box>
+          <hr />
+          <Box>
+            <FormControl fullWidth>
+              <img src="https://i.postimg.cc/C5mwV2vd/05.jpg" />
+            </FormControl>
+          </Box>
+          <hr />
           <Box>
             <Grid container spacing={0} sx={{ marginX: 17 }}>
               <Grid item xs={2.4} >
@@ -363,18 +370,14 @@ function SymptomCreate() {
                 </Button>
               </Grid>
               <Grid item xs={9.6}>
-                <Button 
-                sx={{marginX:45.5}} 
-                variant="contained"
-                color="success"
-                onClick={submit}>
-                  
+                <Button
+                  sx={{ marginX: 45.5 }}
+                  variant="contained"
+                  color="success"
+                  onClick={submit}>
                   บันทึก
                 </Button><p />
               </Grid>
-
-
-
             </Grid>
           </Box>
         </Paper>
