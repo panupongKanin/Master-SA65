@@ -66,7 +66,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/kMtsgFxt/Charactor-11.jpg"
+                                                            image="https://i.postimg.cc/7ZMz7SVq/01-Patient-Create.png"
 
 
                                                       />
@@ -89,7 +89,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/wTpXTKqS/doctor-examining-patient-clinic-illustrated-23-2148856559-jpg.jpg"
+                                                            image="https://i.postimg.cc/CKr429Qv/02-Triage-Create.png"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent>
@@ -111,7 +111,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/Twbbf0Zd/22569.jpg"
+                                                            image="https://i.postimg.cc/0N4pnDzF/03-Mapping-Bed-Create.png"
                                                       />
                                                       <CardContent>
                                                             <Typography gutterBottom variant="h5" component="div" align='center'>
@@ -129,7 +129,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/HkKjn50V/8507.jpg"
+                                                            image="https://i.postimg.cc/L5QRg9Ct/04-Visit-Record-Create.png"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent >
@@ -156,7 +156,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/rsc4XCmR/doctor-patient-medical-concept-hospital-patient-lying-hospital-bed-1150-50285-1.webp"
+                                                            image="https://i.postimg.cc/xdjXmCg7/05-Symptom-Create.png"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent >
@@ -176,7 +176,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/QM1V89vQ/food-pyramid-concept-23-2148485653-1.webp"
+                                                            image="https://i.postimg.cc/CxS5y5y1/06Manage.png"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent >
@@ -197,7 +197,7 @@ function HomePage_02() {
                                                       <CardMedia
                                                             component="img"
                                                             height="140"
-                                                            image="https://i.postimg.cc/HxSmdTW0/medicine-pharmacy-131590-145-1.webp"
+                                                            image="https://i.postimg.cc/ncYV1xst/07-Medicine-Create.png"
                                                             alt="green iguana"
                                                       />
                                                       <CardContent >

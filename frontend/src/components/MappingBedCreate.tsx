@@ -27,7 +27,7 @@ function MappingBedCreate() {
   //=======================================================================================================================================
   //รับค่าที่ได้จากการเลือก combobox ทั้งหมดเป็นตารางที่ ดึงไปใส่ตารางหลัก 
 
-  ///////////////////บันทึกลงตารางหลัก///////////////////
+  // TODO บันทึกลงตารางหลัก
   const [triageID, setTriageID] = useState('');
   const [zoneID, setZoneID] = useState('');
   const [bedID, setBedID] = useState('');
@@ -525,8 +525,11 @@ function MappingBedCreate() {
 
             </Grid>
             <Grid item xs={12}>
-              <Button sx={{ backgroundColor: "#C70039" }} component={RouterLink} to="/HomePage1" variant="contained">
-                ย้อนกลับ
+              <Button sx={{ backgroundColor: "#C70039" }}
+                component={RouterLink}
+                to="/HomePage1"
+                variant="contained">
+                  ย้อนกลับ
               </Button>
               <Button
                 style={{ float: "right" }}
