@@ -287,7 +287,7 @@ function TriagePageCreate() {
                               <hr />
                               <Box>
                                     <FormControl fullWidth>
-                                          <img src="https://i.postimg.cc/Z5rHwh08/02.png" />
+                                          <img width={850} src="https://i.postimg.cc/Z5rHwh08/02.png" />
                                     </FormControl>
                               </Box>
                               <hr />

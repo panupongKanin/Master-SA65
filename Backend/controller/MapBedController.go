@@ -96,7 +96,6 @@ func GetListMapBeds(c *gin.Context) {
 
 
 func 	CreateZone(c *gin.Context){
-
 	var zone entity.Zone
 	if err := c.ShouldBindJSON(&zone); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

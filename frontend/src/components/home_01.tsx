@@ -24,8 +24,6 @@ function HomePage_01() {
       const [User, setUser] = useState<any[]>([]);
 
       const getUser = async () => {
-
-
             const apiUrl = `http://localhost:8080/user/${id}`;
             const requestOptions = {
                   method: "GET",
@@ -43,8 +41,6 @@ function HomePage_01() {
             getUser();
             lock();
       }, []);
-
-
       return (
 
             <Paper elevation={0} sx={{ backgroundColor: "#007B7D" }}>

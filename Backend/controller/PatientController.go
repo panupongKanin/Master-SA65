@@ -222,7 +222,7 @@ func GetRIGHTS(c *gin.Context) {
 	var RIGHTS entity.RIGHTS
 
 	id := c.Param("id")
-	if err := entity.DB().Preload("Owner").Raw("SELECT * FROM RIGHTS WHERE id = ?", id).Find(&RIGHTS).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM RIGHTS WHERE id = ?", id).Find(&RIGHTS).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

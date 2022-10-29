@@ -20,6 +20,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import dayjs, { Dayjs } from 'dayjs';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -37,7 +40,7 @@ function MappingBedCreate() {
   const [triageID, setTriageID] = useState('');
   const [zoneID, setZoneID] = useState('');
   const [bedID, setBedID] = useState('');
-  const [date, setDate] = useState<Date | null>(null);
+  const [date, setDate] = useState<Dayjs | null>(dayjs());
   const [comments, setComments] = useState('');
   // const [userID,setUserID] = useState('');
 
@@ -50,11 +53,9 @@ function MappingBedCreate() {
   const [triages, setTriages] = useState<any[]>([]);
   const [IPD_Name, setIPD_Name] = useState<any[]>([]);
   const [Disease_Name, setDisease_Name] = useState<any[]>([]);
-
   const [userName, setUserName] = useState('');
 
   // console.log(userName);
-
   /*
         ได้ 
         Disease_Type_Name       -->   ตาราง Disease_Type
@@ -66,7 +67,6 @@ function MappingBedCreate() {
   // Check save
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-
   const userID = parseInt(localStorage.getItem("uid") + "");
   console.log(triages);
 
@@ -127,9 +127,9 @@ function MappingBedCreate() {
       Triage_State: 1,
     };
 
-    console.log(dataUpdateBedState);
-    console.log(dataUpdateTriageState);
-    console.log(data);
+    // console.log(dataUpdateBedState);
+    // console.log(dataUpdateTriageState);
+    // console.log(data);
 
     const apiUrl = "http://localhost:8080/CreateMapBed";
     const requestOptions = {
@@ -179,7 +179,6 @@ function MappingBedCreate() {
           if (res.data) { }
         });
     };
-
 
     // reset All after Submit
     setTriageID("");
@@ -321,15 +320,20 @@ function MappingBedCreate() {
     <Paper elevation={0}>
       <Snackbar
         open={success}
-        autoHideDuration={6000}
+        autoHideDuration={1000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="success">
           บันทึกข้อมูลสำเร็จ
         </Alert>
       </Snackbar>
-      <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={error}
+        autoHideDuration={1000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
         <Alert onClose={handleClose} severity="error">
           บันทึกข้อมูลไม่สำเร็จ
         </Alert>
@@ -337,7 +341,6 @@ function MappingBedCreate() {
       <ResponsiveAppBar />
 
       <Container maxWidth="md">
-
         <Box
           display={"flex"}
           sx={{
@@ -364,8 +367,8 @@ function MappingBedCreate() {
 
         <hr />
         <Box>
-          <FormControl fullWidth>
-            <img src="https://i.postimg.cc/PfLM3mwd/03.png" />
+          <FormControl fullWidth >
+            <img width={850} src="https://i.postimg.cc/PfLM3mwd/03.png" />
           </FormControl>
         </Box>
         <hr />
@@ -523,11 +526,14 @@ function MappingBedCreate() {
           <Grid item xs={4}>
             <p>วันที่เข้ารับการรักษา</p>
             <FormControl fullWidth variant="outlined">
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  renderInput={(props) => <TextField {...props} />}
+                  label="เวลาเข้า"
                   value={date}
-                  onChange={(newValue) => { setDate(newValue); }}
-                  renderInput={(params) => <TextField {...params} />}
+                  onChange={(newValue) => {
+                    setDate(newValue);
+                  }}
                 />
               </LocalizationProvider>
             </FormControl>
@@ -545,19 +551,23 @@ function MappingBedCreate() {
                 onChange={handleInputChange}
               />
             </FormControl>
-
           </Grid>
           <Grid item xs={12}>
             <p>ผู้บันทึก</p>
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              value={userName}
-              InputProps={{
-                readOnly: true,
-
-              }}
-            />
+            <FormControl fullWidth>
+                  <Select
+                    native
+                    value={userName}
+                    disabled
+                    inputProps={{
+                      name: "userName",
+                    }}
+                  >
+                    <option aria-label="None" value="">
+                      {userName}
+                    </option>
+                  </Select>
+                </FormControl>
 
           </Grid>
           <Grid item xs={12}>

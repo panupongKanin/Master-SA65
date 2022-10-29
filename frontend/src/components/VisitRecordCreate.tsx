@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { Alert, FormControl, MenuItem, Select, SelectChangeEvent, Snackbar, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -15,7 +13,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { VisitorTypeInterface, VisitRecordInterface } from '../interfaces/IVisitRecord';
 import { Link as RouterLink } from "react-router-dom";
-import { Search } from '@mui/icons-material';
 import ResponsiveAppBar from './Bar_01';
 
 export default function VisitRecordCreate() {
@@ -31,15 +28,8 @@ export default function VisitRecordCreate() {
   const [VisitorTypes, setVisitorTypes] = React.useState<VisitorTypeInterface[]>([]);
 
   //fetch data from other
-  const [VisitRecords, setVisitRecords] = useState<Partial<VisitRecordInterface>>({});
   const [Map_Beds, setMapBeds] = React.useState<any[]>([]);
-  const [Triages, setTriages] = React.useState<any[]>([]);
   const [PatientName, setPatientName] = React.useState('');
-  const [VisitRecord, setVisitRecord] = React.useState<Partial<VisitRecordInterface>>();
-
-  const [triageID, setTriageID] = React.useState('');
-
-  const [userName, setUserName] = React.useState('');
 
   const userID = parseInt(localStorage.getItem("uid") + "");
 
@@ -53,7 +43,6 @@ export default function VisitRecordCreate() {
 
   const onChangeMapBed = (event: SelectChangeEvent) => {
     setMapBedID(event.target.value as string);
-    getTriageID();
     patna();
   };
 
@@ -108,25 +97,8 @@ export default function VisitRecordCreate() {
     setAdded_Time(dayjs());
   }
   //function Search
-  function patname() {
-    getTriageID();
-    const apiUrl1 = `http://localhost:8080/GetTriage/${triageID}`;
-    const requestOptions1 = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(apiUrl1, requestOptions1)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          console.log(res.data);
-          setPatientName(res.data.Patient.Patient_Name);
-        }
-      });
-  }
 
   const patna = async () => {
-    getTriageID();
     const apiUrl1 = `http://localhost:8080/GetMapBed/${MapBedID}`;
     const requestOptions1 = {
       method: "GET",
@@ -159,23 +131,6 @@ export default function VisitRecordCreate() {
       });
   };
 
-  const getTriageID = async () => {
-    const apiUrl = `http://localhost:8080/GetMapBed/${MapBedID}`;
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          console.log(res.data.Triage_ID);
-          setTriageID(res.data.Triage_ID);
-          // setPatientName(res.data.Patient.Patient_NAME)
-        }
-      });
-  };
-
   const getMapBeds = async () => {
     const apiUrl = "http://localhost:8080/GetListMapBeds";
     const requestOptions = {
@@ -191,43 +146,10 @@ export default function VisitRecordCreate() {
       });
   };
 
-  const getTriages = async () => {
-    const apiUrl = "http://localhost:8080/GetListTriages";
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          setTriages(res.data);
-        }
-      });
-  };
-
-  const getUser = async () => {
-    const apiUrl = `http://localhost:8080/user${userID}`;
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          setUserName(res.data.Name);
-        };
-      });
-  };
-
   //========function useEffect ========
   React.useEffect(() => {
     getVisitorType();
     getMapBeds();
-    getTriages();
-    getTriageID();
-    getUser();
     patna();
 
   }, [MapBedID]);
@@ -237,8 +159,6 @@ export default function VisitRecordCreate() {
       <CssBaseline />
       <ResponsiveAppBar />
       <Container maxWidth="lg">
-        {/*<Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />*/}
-        {/*paper*/}
         <Paper>
           <Snackbar
             open={success}
@@ -276,14 +196,14 @@ export default function VisitRecordCreate() {
               </Typography>
             </Box>
           </Box>
-          
           <hr />
           <Box>
             <FormControl fullWidth>
-              <img src="https://i.postimg.cc/13RBKb0j/04.png" />
+              <img  width={1200} src="https://i.postimg.cc/13RBKb0j/04.png" />
             </FormControl>
           </Box>
           <hr />
+
           <Grid container spacing={1}
             sx={{
               marginY: 2,
@@ -323,10 +243,6 @@ export default function VisitRecordCreate() {
                   <MenuItem value="">
                     กรุณาเลือกประเภทผู้เข้าเยี่ยม
                   </MenuItem>
-                  {/* {VisitorTypes.map((item: VisitorTypeInterface)=> (
-                    <MenuItem value={item.ID} key={item.ID}>
-                      {item.Name}
-                    </MenuItem> */}
                   {VisitorTypes.map(visitortype => (
                     <MenuItem value={visitortype.ID} key={visitortype.ID}>
                       {visitortype.Name}
@@ -418,15 +334,15 @@ export default function VisitRecordCreate() {
               </LocalizationProvider>
             </Grid>
             <Grid item xs={12}>
-              <Button sx={{ backgroundColor: "#C70039" ,marginY:3,marginX:3}}
+              <Button sx={{ backgroundColor: "#C70039", marginY: 3, marginX: 3 }}
                 component={RouterLink} to="/HomePage1" variant="contained">
                 ย้อนกลับ
               </Button>
               <Button
                 onClick={submit}
                 variant="contained"
-                sx={{ float: "right" ,marginY:3,marginX:3}}
-   
+                sx={{ float: "right", marginY: 3, marginX: 3 }}
+
                 color="success"
               >
                 บันทึก
@@ -441,6 +357,4 @@ export default function VisitRecordCreate() {
   );
 }
 
-function convertType(VisitorTypeID: string) {
-  throw new Error('Function not implemented.');
-}
+

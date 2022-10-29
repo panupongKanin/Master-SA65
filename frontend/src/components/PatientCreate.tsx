@@ -281,7 +281,7 @@ function PatientCreate() {
           <hr />
           <Box>
             <FormControl fullWidth>
-              <img src="https://i.postimg.cc/QtrZVX5z/01.jpg" />
+              <img width={850} src="https://i.postimg.cc/QtrZVX5z/01.jpg" />
             </FormControl>
           </Box>
           <hr />
@@ -305,10 +305,6 @@ function PatientCreate() {
                 />
               </FormControl>
             </Grid>
-
-
-
-
             <Grid item xs={3}>
               <p>ชื่อ-สกุล</p>
             </Grid>

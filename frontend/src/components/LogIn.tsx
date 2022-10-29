@@ -29,7 +29,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const theme = createTheme();
 
 function LogIn() {
-  const [signin, setSignin] = useState<Partial<SigninInterface>>({});
+  const [login, setLogin] = useState<Partial<SigninInterface>>({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -37,9 +37,9 @@ function LogIn() {
   const handleInputChange = (
     event: React.ChangeEvent<{ id?: string; value: any }>
   ) => {
-    const id = event.target.id as keyof typeof signin;
+    const id = event.target.id as keyof typeof login;
     const { value } = event.target;
-    setSignin({ ...signin, [id]: value });
+    setLogin({ ...login, [id]: value });
   };
 
   const handleClose = (
@@ -54,7 +54,7 @@ function LogIn() {
   };
 
   const submit = async () => {
-    let res = await Login(signin);  
+    let res = await Login(login);  
     const apiUrl = `http://localhost:8080/user/${res.id}`;
     const requestOptions = {
       method: "GET",
@@ -144,7 +144,7 @@ function LogIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={signin.Email || ""}
+                value={login.Email || ""}
                 onChange={handleInputChange}
               />
               <TextField
@@ -156,7 +156,7 @@ function LogIn() {
                 type="password"
                 id="Password"
                 autoComplete="current-password"
-                value={signin.Password || ""}
+                value={login.Password || ""}
                 onChange={handleInputChange}
               />
              

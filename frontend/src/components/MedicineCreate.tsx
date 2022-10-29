@@ -330,7 +330,7 @@ function BASKETCreate() {
           <hr />
           <Box>
             <FormControl fullWidth>
-              <img src="https://i.postimg.cc/SRzHgtww/07.jpg" />
+              <img width={850} src="https://i.postimg.cc/SRzHgtww/07.jpg" />
             </FormControl>
           </Box>
           <hr />

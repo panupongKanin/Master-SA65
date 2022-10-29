@@ -206,7 +206,7 @@ function SymptomCreate() {
           <hr />
           <Box>
             <FormControl fullWidth>
-              <img src="https://i.postimg.cc/C5mwV2vd/05.jpg" />
+              <img width={850} src="https://i.postimg.cc/C5mwV2vd/05.jpg" />
             </FormControl>
           </Box>
           <hr />

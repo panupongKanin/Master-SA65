@@ -7,10 +7,9 @@ import (
 	"github.com/panupongKanin/ProjectSA-arm/entity"
 )
 
-//TODO========================Manage========================//
 // POST/ manage
 func CreateManage (c *gin.Context){
-	var manage entity.Manage //สังเกตว่า ไม่มี [] เพราะอะไรไปหาคำตอบมา => []index ไม่มีก็แปลว่าไม่ใช่ index
+	var manage entity.Manage
 	var user entity.User
 	var nutrition entity.Nutrition
 	var map_bed entity.Map_Bed
@@ -37,20 +36,13 @@ func CreateManage (c *gin.Context){
 		return
 	}
 
-	//สร้าง Manage // TODO มีการเปลี่ยนแปลง
+	//สร้าง Manage
 	ma := entity.Manage{
 		User_ID: manage.User_ID,
 		NutritionID: manage.NutritionID,
 		Map_BedID: manage.Map_BedID,
-		Date: manage.Date, // setค่าจาก Field 
-		Comment: manage.Comment, //เพิ่ม String จาก Text Field
-
-
-		// User: user,
-		// Nutrition: nutrition,
-		// Map_Bed: map_bed,
-		// Date: manage.Date, // setค่าจาก Field 
-		// Comment: manage.Comment, //เพิ่ม String จาก Text Field
+		Date: manage.Date, 
+		Comment: manage.Comment, 
 	}
 
 	//บันทึก
@@ -66,7 +58,7 @@ func CreateManage (c *gin.Context){
 func ListManage (c *gin.Context){
 	var manages []entity.Manage 
 	
-	if err := entity.DB().Preload("Doctor").Preload("Nutrition").Preload("Map_Bed").Raw("SELECT * FROM manages").Find(&manages).Error; err != nil {
+	if err := entity.DB().Preload("User.UserType").Preload("Nutrition").Preload("Map_Bed").Raw("SELECT * FROM manages").Find(&manages).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error":err.Error()})
 		return
 	}
@@ -74,7 +66,7 @@ func ListManage (c *gin.Context){
 	
 }
 
-//TODO========================Nutrition========================//
+
 // GET /nutritions
 func ListNutritions (c *gin.Context){
 	var nutritions []entity.Nutrition
