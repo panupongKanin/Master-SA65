@@ -101,7 +101,7 @@ func main() {
 
 	r.GET("/ListMedicine", controller.ListMedicine)
 	r.GET("/ListWhere", controller.ListWhere)
-	r.POST("/CreateWhere", controller.CreateWhere)
+	// r.POST("/CreateWhere", controller.CreateWhere)
 	r.GET("/ListBasket", controller.ListBasket)
 	r.POST("/CreateBasket", controller.CreateBasket)
 

@@ -6,18 +6,12 @@ import Container from "@mui/material/Container";
 import { AppBar, Button, FormControl, IconButton, Paper, Toolbar, Typography } from '@mui/material';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { MEDICINEInterface, WHEREInterface, DOCTORInterface, BASKETInterface } from "../interfaces/MedicineUI";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { MEDICINEInterface, WHEREInterface, BASKETInterface } from "../interfaces/MedicineUI";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Stack from '@mui/material/Stack';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import dayjs, { Dayjs } from "dayjs";
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ResponsiveAppBar from './Bar_02';
@@ -36,7 +30,6 @@ function BASKETCreate() {
 
   //ประกาศเพื่อ รับค่าที่ได้จากการเลือก combobox ทั้งหมดเป็นตารางที่ ดึงไปใส่ตารางหลัก 
   const [MEDICINE_ID, setMEDICINE_ID] = useState('');
-  const [DOCTOR_ID, setDOCTOR_ID] = useState('');
   const [WHERE_ID, setWHERE_ID] = useState('');
   const [Symptom_ID, setSymptom_ID] = useState('');
 
@@ -73,13 +66,13 @@ function BASKETCreate() {
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
-    const name = event.target.name as keyof typeof BASKET;        //สงสัยว่าส่วนนี้ต้องเปลี่ยน name หรือเปล่า
+    const name = event.target.name as keyof typeof BASKET;      
     setBasket({
       ...BASKET,
       [name]: event.target.value,
     });
   };
-  //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
+  //สร้างฟังก์ชันสำหรับ คอยรับการกระทำเมื่อมี action
   const handleInputChange = (
     event: React.ChangeEvent<{ id?: string; value: any }>
   ) => {
@@ -88,7 +81,7 @@ function BASKETCreate() {
     setBasket({ ...BASKET, [id]: value });
   };
 
-  //สร้างฟังก์ชัน เมื่อเลือก เพศ แล้วให้ setGender(สร้างไว้แล้วข้างบน) 
+  //สร้างฟังก์ชัน เมื่อเลือก ผู้ป่าย แล้วให้ setSymtomp_ID(สร้างไว้แล้วข้างบน) 
   const onChangeSymptom = (event: SelectChangeEvent) => {
     setSymptom_ID(event.target.value as string);
     GetSymptomID();
@@ -100,9 +93,6 @@ function BASKETCreate() {
   const onChangeMEDICINE = (event: SelectChangeEvent) => {
     setMEDICINE_ID(event.target.value as string);
   };
-  const onChangeDOCTOR = (event: SelectChangeEvent) => {
-    setDOCTOR_ID(event.target.value as string);
-  };
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
   const convertType = (data: string | number | undefined) => {
@@ -113,10 +103,10 @@ function BASKETCreate() {
   //ฟังก์ชันนี้ สำหรับการกดปุ่ม submit จะทำการสร้างข้อมูลต่าง ๆ เพื่อส่งไปทำการบันทึกที่ backend
   function submit() {
     let data = {
-      //Name: user.Name ?? "",                  //ยังไม่ได้ทำ ดึงมาจากระบบlogin
-      AMOUNT: typeof BASKET.ID == "string" ? parseInt(BASKET.ID) : 0,           //patient.name คือการดึงค่าจากค่า Name ที่เก็บไว้ข้างใน Patient อีกทีมาใช้
+
+      AMOUNT: typeof BASKET.ID == "string" ? parseInt(BASKET.ID) : 0,
       Add_time: Add_time,
-      WHERE_ID: convertType(WHERE_ID),          //GenderID != patient.GenderID บรรทัดนี้ น้ำค่า GenderID ที่ประกาศไว้ด้านบนมาใช้เลย 
+      WHERE_ID: convertType(WHERE_ID),
       MEDICINE_ID: convertType(MEDICINE_ID),
       Symptom_ID: convertType(Symptom_ID),
       User_ID: convertType(userID),
@@ -133,7 +123,6 @@ function BASKETCreate() {
     const requestOptions = {
       method: "POST",
       headers: {
-        //Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data),
@@ -154,7 +143,6 @@ function BASKETCreate() {
     setDate(null);
     setWHERE_ID("");
     setMEDICINE_ID("");
-    setDOCTOR_ID("");
     setSymptom_ID("");
 
 
@@ -163,9 +151,6 @@ function BASKETCreate() {
 
 
   const [Symtomp, setSymtomp] = React.useState<any[]>([]); //useStateเรียกทุกตัวมาใช้
-  const [triages, setTriages] = useState<any[]>([]);
-  console.log(triages);
-
 
   const getSymptom = async () => {
     GetSymptomID();
@@ -242,7 +227,6 @@ function BASKETCreate() {
           setHrate(res.data.Heart_rate)
           setComm(res.data.Comment)
           setMed(res.data.Medicine)
-          // setPatient_Name(res.data.Patient.Patient_NAME);
 
         }
       });
@@ -464,7 +448,7 @@ function BASKETCreate() {
                 <TextField
                   id="ID"
                   variant="outlined"
-                  type="string"
+                  type="number"
                   size="medium"
                   value={BASKET.ID || ""}
                   onChange={handleInputChange}
@@ -537,7 +521,6 @@ function BASKETCreate() {
                 <Select
                   native
                   value={userName}
-                  onChange={onChangeDOCTOR}
                   inputProps={{
                     name: "DOCTOR_ID",
                   }}

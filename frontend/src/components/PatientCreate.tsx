@@ -6,7 +6,6 @@ import Container from "@mui/material/Container";
 import { AppBar, Button, FormControl, IconButton, Paper, Toolbar, Typography } from '@mui/material';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { PatientInterface, GenderInterface, RIGHTSInterface, Blood_typeInterface, Drug_AllergyInterface } from "../interfaces/PatientUI";
@@ -14,10 +13,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import ResponsiveAppBar from './Bar_01';
-import { kMaxLength } from "buffer";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 
 //ฟังค์ชันสำหรับ alert
@@ -36,11 +34,10 @@ function PatientCreate() {
   const [GenderID, setGenderID] = useState('');
   const [RIGHTSID, setRIGHTSID] = useState('');
 
-  const [Date_of_Birth, setDate] = React.useState<Date | null>(null);
+  const [Date_of_Birth, setDate] = useState<Dayjs | null>(dayjs());
   const [patient, setPatient] = React.useState<Partial<PatientInterface>>({});
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-  //const userID = localStorage.getItem("uid")
 
   const userID = parseInt(localStorage.getItem("uid") + "");
 
@@ -60,7 +57,7 @@ function PatientCreate() {
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
-    const name = event.target.name as keyof typeof patient;        //สงสัยว่าส่วนนี้ต้องเปลี่ยน name หรือเปล่า
+    const name = event.target.name as keyof typeof patient;    
     setPatient({
       ...patient,
       [name]: event.target.value,
@@ -114,13 +111,12 @@ function PatientCreate() {
     };
 
     //check data
-    console.log(userID)
+    console.log(data)
 
     const apiUrl = "http://localhost:8080/CreatePatient";
     const requestOptions = {
       method: "POST",
       headers: {
-        //Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data),
@@ -323,19 +319,18 @@ function PatientCreate() {
 
 
 
-            {/* <Grid  container spacing={2} sx={{padding:2}}> */}
             <Grid item xs={3} >
               <p>วันเกิด</p>
             </Grid>
             <Grid item xs={9}>
               <FormControl fullWidth variant="outlined">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
+                    renderInput={(params) => <TextField {...params} />}
                     value={Date_of_Birth}
                     onChange={(newValue) => {
                       setDate(newValue);
                     }}
-                    renderInput={(params) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
               </FormControl>
@@ -344,7 +339,6 @@ function PatientCreate() {
 
 
             <Grid item xs={3}>
-              {/* <FormControl fullWidth variant="outlined"> */}
               <p>เพศ</p>
             </Grid>
             <Grid item xs={9}>
@@ -420,7 +414,6 @@ function PatientCreate() {
 
 
             <Grid item xs={3}>
-              {/* <FormControl fullWidth variant="outlined"> */}
               <p>สิทธิ์การรักษาพยาบาล</p>
             </Grid>
             <Grid item xs={9}>

@@ -2,16 +2,14 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { AppBar, Button, FormControl, IconButton, Paper, Snackbar, Toolbar, Typography } from '@mui/material';
+import {Button, FormControl, Paper, Snackbar, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from '@mui/material/TextField';
 import { ZoneInterface, BedInterface, MappingBedInterface } from "../interfaces/MapBedUI";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ResponsiveAppBar from './Bar_01';
 import { Link as RouterLink } from "react-router-dom";
 import Table from '@mui/material/Table';
@@ -68,7 +66,7 @@ function MappingBedCreate() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const userID = parseInt(localStorage.getItem("uid") + "");
-  console.log(triages);
+  console.log(date);
 
   //=======================================================================================================================================
   //สร้างฟังก์ชันสำหรับ คอยรับการกระทำ เมื่อคลิ๊ก หรือ เลือก
@@ -129,56 +127,54 @@ function MappingBedCreate() {
 
     // console.log(dataUpdateBedState);
     // console.log(dataUpdateTriageState);
-    // console.log(data);
+    console.log(data);
 
-    const apiUrl = "http://localhost:8080/CreateMapBed";
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          UpdateBedstate();
-          UpdateTriagestate();
-          getTriages();
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-          setSuccess(true);
-        } else {
-          setError(true);
-        }
-      });
+    // const apiUrl = "http://localhost:8080/CreateMapBed";
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data),
+    // };
+    // fetch(apiUrl, requestOptions)
+    //   .then((response) => response.json())
+    //   .then((res) => {
+    //     if (res.data) {
+    //       UpdateBedstate();
+    //       UpdateTriagestate();
+    //       getTriages();
 
-    const UpdateBedstate = async () => {
-      const apiUrl = "http://localhost:8080/UpdateBedstate";
-      const requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dataUpdateBedState),
-      };
-      fetch(apiUrl, requestOptions)
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.data) { }
-        });
-    };
-    const UpdateTriagestate = async () => {
-      const apiUrl = "http://localhost:8080/UpdateTriagestate";
-      const requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dataUpdateTriageState),
-      };
-      fetch(apiUrl, requestOptions)
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.data) { }
-        });
-    };
+    //       setSuccess(true);
+    //     } else {
+    //       setError(true);
+    //     }
+    //   });
+
+    // const UpdateBedstate = async () => {
+    //   const apiUrl = "http://localhost:8080/UpdateBedstate";
+    //   const requestOptions = {
+    //     method: "PATCH",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(dataUpdateBedState),
+    //   };
+    //   fetch(apiUrl, requestOptions)
+    //     .then((response) => response.json())
+    //     .then((res) => {
+    //       if (res.data) { }
+    //     });
+    // };
+    // const UpdateTriagestate = async () => {
+    //   const apiUrl = "http://localhost:8080/UpdateTriagestate";
+    //   const requestOptions = {
+    //     method: "PATCH",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(dataUpdateTriageState),
+    //   };
+    //   fetch(apiUrl, requestOptions)
+    //     .then((response) => response.json())
+    //     .then((res) => {
+    //       if (res.data) { }
+    //     });
+    // };
 
     // reset All after Submit
     setTriageID("");
@@ -529,7 +525,7 @@ function MappingBedCreate() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
                   renderInput={(props) => <TextField {...props} />}
-                  label="เวลาเข้า"
+                  inputFormat="DD/MM/YYYY hh:mm a"
                   value={date}
                   onChange={(newValue) => {
                     setDate(newValue);

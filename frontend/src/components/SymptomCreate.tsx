@@ -6,8 +6,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import FormControl from '@mui/material/FormControl';
 import Snackbar from "@mui/material/Snackbar";
@@ -16,13 +14,17 @@ import { Link as RouterLink } from "react-router-dom";
 import ResponsiveAppBar from './Bar_02';
 
 import { MappingBedInterface } from "../interfaces/MapBedUI";
-import { LevelInterface, SymptomInterface } from "../interfaces/SymptomUI";
+import { LevelInterface} from "../interfaces/SymptomUI";
 import { Typography } from "@mui/material";
+
+import dayjs, { Dayjs } from 'dayjs';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
 function SymptomCreate() {
 
-  const [date, setDate] = React.useState<Date | null>(null);
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
   const [temp, setTemp] = React.useState<String>("");
   const [press, setPress] = React.useState<String>("");
   const [hrate, setHrate] = React.useState<String>("");
@@ -31,8 +33,6 @@ function SymptomCreate() {
 
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-
-  const [symptom, setSymptom] = React.useState<Partial<SymptomInterface>>({});
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -99,7 +99,6 @@ function SymptomCreate() {
     setComm("");
     setMapbedID("");
     setLevelID("");
-    setSymptom({});
   }
 
   const [mapbeds, setMapbed] = React.useState<any[]>([]);
@@ -194,7 +193,6 @@ function SymptomCreate() {
                 variant="h4"
                 color="#558b2f"
                 gutterBottom
-                //align="center"
                 fontFamily="Arial"
               >
                 <hr color="Green" />
@@ -325,8 +323,8 @@ function SymptomCreate() {
                 <p>วันที่ทำการประเมิน</p>
               </Grid>
               <Grid item xs={9.6}>
-                <LocalizationProvider dateAdapter={AdapterDateFns} >
-                  <DatePicker
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                  <DateTimePicker
                     label={"เดือน/วัน/ปี"}
                     value={date}
                     onChange={(newValue) => {
