@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import {Button, FormControl, Paper, Snackbar, Typography } from '@mui/material';
+import { Button, FormControl, Paper, Snackbar, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
@@ -92,6 +92,10 @@ function MappingBedCreate() {
     setBedID(event.target.value as string);
   };
 
+  const handleChange = (newValue: Dayjs | null) => {
+    setDate(newValue);
+  };
+
   //=======================================================================================================================================
   //function Submit
   const handleClose = (
@@ -104,13 +108,55 @@ function MappingBedCreate() {
     setSuccess(false);
     setError(false);
   };
+  // TODO set time zone ให้ถูก
+  const dateFormatAux = (date: any) => {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear(),
+      hh = '' + (7 + d.getUTCHours()),
+      mm = '' + d.getMinutes(),
+      ss = '' + d.getUTCSeconds();
+
+    if (month.length < 2)
+      month = '0' + month;
+
+    if (hh.length < 2)
+      hh = '0' + hh;
+
+    if (mm.length < 2)
+      mm = '0' + mm;
+
+    if (ss.length < 2)
+      ss = '0' + ss;
+
+    return year + "-" + month + "-" + day + "T" + hh + ":" + mm + ":" + ss + "+07:00";
+  }
+
+  const dateFormat = (date: any) => {
+
+    console.log(new Date(date));
+
+    let formatYearMonthDay = dateFormatAux(date);
+    // console.log(formatYearMonthDay);
+
+    // แปลงเป็น format ให้ตรงกับ backend แล้ว timezone เพี้ยน ปัญหาอยู่ตรง toISOString()
+    // let formatISO8601 = new Date(date).toISOString();
+    // console.log(formatISO8601);
+
+    return [formatYearMonthDay];
+  }
+  // TODO set time zone ให้ถูก
 
   async function submit() {
+    let DateYMD;
+    if (date != null)
+      [DateYMD] = dateFormat(date);
     // Data ที่จะนำไปบันทึกลงใน Table Map_Bed
     let data = {
       Triage_ID: triageID,
       Bed_ID: bedID,
-      Admidtime: date,
+      Admidtime: DateYMD,
       MapBed_Comment: comments,
       User_ID: userID,
     };
@@ -129,52 +175,52 @@ function MappingBedCreate() {
     // console.log(dataUpdateTriageState);
     console.log(data);
 
-    // const apiUrl = "http://localhost:8080/CreateMapBed";
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch(apiUrl, requestOptions)
-    //   .then((response) => response.json())
-    //   .then((res) => {
-    //     if (res.data) {
-    //       UpdateBedstate();
-    //       UpdateTriagestate();
-    //       getTriages();
+    const apiUrl = "http://localhost:8080/CreateMapBed";
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          UpdateBedstate();
+          UpdateTriagestate();
+          getTriages();
 
-    //       setSuccess(true);
-    //     } else {
-    //       setError(true);
-    //     }
-    //   });
+          setSuccess(true);
+        } else {
+          setError(true);
+        }
+      });
 
-    // const UpdateBedstate = async () => {
-    //   const apiUrl = "http://localhost:8080/UpdateBedstate";
-    //   const requestOptions = {
-    //     method: "PATCH",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(dataUpdateBedState),
-    //   };
-    //   fetch(apiUrl, requestOptions)
-    //     .then((response) => response.json())
-    //     .then((res) => {
-    //       if (res.data) { }
-    //     });
-    // };
-    // const UpdateTriagestate = async () => {
-    //   const apiUrl = "http://localhost:8080/UpdateTriagestate";
-    //   const requestOptions = {
-    //     method: "PATCH",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(dataUpdateTriageState),
-    //   };
-    //   fetch(apiUrl, requestOptions)
-    //     .then((response) => response.json())
-    //     .then((res) => {
-    //       if (res.data) { }
-    //     });
-    // };
+    const UpdateBedstate = async () => {
+      const apiUrl = "http://localhost:8080/UpdateBedstate";
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataUpdateBedState),
+      };
+      fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.data) { }
+        });
+    };
+    const UpdateTriagestate = async () => {
+      const apiUrl = "http://localhost:8080/UpdateTriagestate";
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataUpdateTriageState),
+      };
+      fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.data) { }
+        });
+    };
 
     // reset All after Submit
     setTriageID("");
@@ -522,14 +568,13 @@ function MappingBedCreate() {
           <Grid item xs={4}>
             <p>วันที่เข้ารับการรักษา</p>
             <FormControl fullWidth variant="outlined">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DateTimePicker
-                  renderInput={(props) => <TextField {...props} />}
-                  inputFormat="DD/MM/YYYY hh:mm a"
+                  inputFormat="DD/MM/YYYY hh:mm"
+
                   value={date}
-                  onChange={(newValue) => {
-                    setDate(newValue);
-                  }}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
             </FormControl>
@@ -551,19 +596,19 @@ function MappingBedCreate() {
           <Grid item xs={12}>
             <p>ผู้บันทึก</p>
             <FormControl fullWidth>
-                  <Select
-                    native
-                    value={userName}
-                    disabled
-                    inputProps={{
-                      name: "userName",
-                    }}
-                  >
-                    <option aria-label="None" value="">
-                      {userName}
-                    </option>
-                  </Select>
-                </FormControl>
+              <Select
+                native
+                value={userName}
+                disabled
+                inputProps={{
+                  name: "userName",
+                }}
+              >
+                <option aria-label="None" value="">
+                  {userName}
+                </option>
+              </Select>
+            </FormControl>
 
           </Grid>
           <Grid item xs={12}>

@@ -20,6 +20,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "dayjs": "^1.11.6",
+    "moment-timezone": "^0.5.38",
     "react": "^18.2.0",
     "react-bootstrap-buttons": "^1.0.0",
     "react-bootstrap-form": "^0.1.4-beta6",

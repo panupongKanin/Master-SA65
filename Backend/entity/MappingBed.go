@@ -6,6 +6,8 @@ import(
 	"time"
 )
 
+
+
 type Zone struct{
 	gorm.Model
 	Zone_Name string

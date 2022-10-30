@@ -299,7 +299,7 @@ export default function VisitRecordCreate() {
             </Grid>
             <Grid item xs={2}>
               <Typography variant="inherit" align="right">
-                ชื่อผู้คนไข้ใน
+                ชื่อคนไข้ใน
               </Typography>
             </Grid>
             <Grid item xs={4}>
